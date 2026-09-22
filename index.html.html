@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0a0a0a" />
+<title>hyfun5656 — Pizza Delivered Fast</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<style>
+/* ============================================================
+   hyfun5656 — Global Styles (Dark Premium Theme)
+   ============================================================ */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --bg:        #0a0a0a;
+  --bg2:       #121212;
+  --bg3:       #1a1a1a;
+  --bg4:       #232323;
+  --border:    #2a2a2a;
+  --border2:   #333;
+  --text:      #f5f5f5;
+  --text-dim:  #9a9a9a;
+  --accent:    #ff4d2d;
+  --accent-d:  #e03a1a;
+  --gold:      #ffb800;
+  --green:     #22c55e;
+  --red:       #ef4444;
+  --blue:      #3b82f6;
+  --radius:    16px;
+  --radius-sm: 10px;
+  --shadow:    0 10px 30px rgba(0,0,0,.5);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.7);
+}
+
+html, body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body { padding-bottom: 78px; } /* space for mobile bottom nav */
+
+img { max-width: 100%; display: block; }
+button, input, select, textarea { font-family: inherit; font-size: inherit; }
+button { cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.material-icons-round { font-size: 22px; vertical-align: middle; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border2); }
+
+/* ============================================================
+   TOP HEADER
+   ============================================================ */
+header.app-header{
+  position: sticky; top: 0; z-index: 90;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+}
+.header-row{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; max-width: 1400px; margin: 0 auto;
+}
+.brand{
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer; user-select: none;
+}
+.brand-logo{
+  width: 40px; height: 40px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  display: grid; place-items: center;
+  font-weight: 900; font-size: 20px; color: #fff;
+  overflow: hidden; flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(255,77,45,.4);
+}
+.brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+.brand-name{
+  font-weight: 800; font-size: 20px; letter-spacing: -.5px;
+  background: linear-gradient(135deg, #fff, #bbb);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.brand-tag { font-size: 11px; color: var(--text-dim); font-weight: 400; }
+
+.status-pill{
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 600;
+  background: rgba(34,197,94,.15); color: var(--green);
+  border: 1px solid rgba(34,197,94,.3);
+}
+.status-pill.closed{
+  background: rgba(239,68,68,.15); color: var(--red);
+  border-color: rgba(239,68,68,.3);
+}
+.status-pill .dot{
+  width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: .4; } }
+
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.icon-btn{
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: grid; place-items: center;
+  transition: all .2s; position: relative;
+}
+.icon-btn:hover, .icon-btn:active { background: var(--bg4); transform: translateY(-1px); }
+.icon-btn .badge{
+  position: absolute; top: -4px; right: -4px;
+  background: var(--accent); color: #fff;
+  font-size: 10px; font-weight: 700;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; display: grid; place-items: center;
+  border: 2px solid var(--bg);
+}
+
+/* Desktop nav (hidden on mobile) */
+.desktop-nav { display: none; gap: 4px; }
+.desktop-nav button{
+  padding: 8px 14px; border-radius: 10px; font-weight: 500;
+  font-size: 14px; color: var(--text-dim); transition: all .2s;
+}
+.desktop-nav button:hover { color: var(--text); background: var(--bg3); }
+.desktop-nav button.active { color: var(--text); background: var(--bg3); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
+.page { display: none; padding: 20px 0 40px; }
+.page.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.section-title {
+  font-size: 22px; font-weight: 800; letter-spacing: -.5px;
+  margin-bottom: 4px; display: flex; align-items: center; gap: 8px;
+}
+.section-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 18px; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position: relative; overflow: hidden;
+  border-radius: 24px; padding: 40px 24px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,184,0,.15), transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255,77,45,.2), transparent 50%),
+    linear-gradient(135deg, #1a1414, #0a0a0a);
+  border: 1px solid var(--border);
+  margin-bottom: 30px;
+}
+.hero::after{
+  content: "🍕"; position: absolute; right: -20px; bottom: -30px;
+  font-size: 200px; opacity: .06; transform: rotate(-15deg);
+  pointer-events: none;
+}
+.hero h1{
+  font-size: clamp(28px, 6vw, 52px); font-weight: 900;
+  line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 12px;
+  max-width: 620px;
+}
+.hero h1 span{
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p{ color: var(--text-dim); font-size: 15px; max-width: 500px; margin-bottom: 24px; }
+.hero-btns{ display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn{
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 22px; border-radius: 12px;
+  font-weight: 600; font-size: 14px;
+  transition: all .2s; border: 1px solid transparent;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary{
+  background: linear-gradient(135deg, var(--accent), var(--accent-d));
+  color: #fff; box-shadow: 0 8px 24px rgba(255,77,45,.35);
+}
+.btn-primary:hover { box-shadow: 0 10px 30px rgba(255,77,45,.5); }
+.btn-ghost{ background: var(--bg3); border-color: var(--border); color: var(--text); }
+.btn-ghost:hover { background: var(--bg4); }
+.btn-gold{ background: linear-gradient(135deg, var(--gold), #e0a000); color: #1a1a1a; font-weight: 700; }
+.btn-green{ background: var(--green); color: #fff; }
+.btn-red{ background: var(--red); color: #fff; }
+.btn-sm { padding: 8px 14px; font-size: 12px; border-radius: 10px; }
+.btn-block { width: 100%; }
+
+/* ============================================================
+   CATEGORY CHIPS
+   ============================================================ */
+.cat-scroll{
+  display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 14px;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+.cat-chip{
+  flex-shrink: 0; padding: 8px 16px; border-radius: 999px;
+  background: var(--bg3); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 500; color: var(--text-dim);
+  transition: all .2s; white-space: nowrap;
+}
+.cat-chip.active{
+  background: linear-gradient(135deg, var(--accent), var(--accent-d));
+  border-color: transparent; color: #fff;
+  box-shadow: 0 6px 16px rgba(255,77,45,.35);
+}
+
+/* ============================================================
+   PRODUCT GRID
+   ============================================================ */
+.product-grid{
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px){ .product-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px){ .product-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.product-card{
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: all .25s; display: flex; flex-direction: column;
+  position: relative;
+}
+.product-card:hover{
+  border-color: var(--border2);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.5);
+}
+.product-img{
+  width: 100%; aspect-ratio: 1/1; object-fit: cover;
+  background: var(--bg3); display: block;
+}
+.product-body{ padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.product-name{
+  font-weight: 700; font-size: 14px; line-height: 1.2;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-desc{
+  font-size: 11px; color: var(--text-dim); line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 2px; }
+.badge-tag{
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 5px; letter-spacing: .3px;
+}
+.badge-veg { background: rgba(34,197,94,.15); color: var(--green); border: 1px solid rgba(34,197,94,.35); }
+.badge-nonveg { background: rgba(239,68,68,.15); color: var(--red); border: 1px solid rgba(239,68,68,.35); }
+.badge-off { background: rgba(255,184,0,.15); color: var(--gold); border: 1px solid rgba(255,184,0,.35); }
+
+.product-price-row{
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto; padding-top: 8px;
+}
+.price{ display: flex; align-items: baseline; gap: 5px; }
+.price .now { font-weight: 800; font-size: 17px; color: var(--text); }
+.price .was { font-size: 11px; color: var(--text-dim); text-decoration: line-through; }
+
+.size-select{
+  width: 100%; padding: 6px 10px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); font-size: 12px; margin-top: 4px;
+}
+.size-select:focus { outline: none; border-color: var(--accent); }
+
+.add-btn{
+  width: 100%; padding: 9px; border-radius: 10px;
+  background: var(--accent); color: #fff; font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  transition: all .2s; margin-top: 8px;
+}
+.add-btn:hover { background: var(--accent-d); }
+.add-btn:active { transform: scale(.96); }
+.add-btn:disabled { background: var(--bg4); color: var(--text-dim); cursor: not-allowed; }
+
+.qty-row{ display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.qty-btn{
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: grid; place-items: center; font-weight: 700;
+  transition: all .15s;
+}
+.qty-btn:active { background: var(--accent); color: #fff; }
+.qty-val { flex: 1; text-align: center; font-weight: 700; font-size: 14px; }
+
+/* ============================================================
+   CART
+   ============================================================ */
+.cart-list { display: flex; flex-direction: column; gap: 10px; }
+.cart-item{
+  display: flex; gap: 12px; padding: 12px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.cart-item img{
+  width: 76px; height: 76px; border-radius: 12px;
+  object-fit: cover; flex-shrink: 0; background: var(--bg3);
+}
+.cart-item-body{ flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.cart-item-name{ font-weight: 700; font-size: 14px; }
+.cart-item-meta{ font-size: 11px; color: var(--text-dim); }
+.cart-item-row{ display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+
+.summary-card{
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px;
+}
+.summary-row{
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; font-size: 14px; color: var(--text-dim);
+}
+.summary-row.total{
+  border-top: 1px dashed var(--border2);
+  margin-top: 8px; padding-top: 14px;
+  font-size: 18px; font-weight: 800; color: var(--text);
+}
+.summary-row.total .amt{
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.field { margin-bottom: 14px; }
+.field label{
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--text-dim); margin-bottom: 6px; letter-spacing: .3px;
+}
+.field input, .field select, .field textarea {
+  width: 100%; padding: 12px 14px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 12px; color: var(--text); font-size: 14px;
+  transition: all .2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,77,45,.15);
+}
+.field textarea { resize: vertical; min-height: 80px; }
+
+/* ============================================================
+   ORDERS / TRACKING
+   ============================================================ */
+.order-card{
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; margin-bottom: 14px;
+}
+.order-head{
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 8px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.order-id { font-weight: 800; font-size: 14px; }
+.order-date { font-size: 11px; color: var(--text-dim); }
+.order-status{
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; letter-spacing: .5px;
+  white-space: nowrap;
+}
+.status-received   { background: rgba(59,130,246,.15); color: #60a5fa; }
+.status-confirmed  { background: rgba(168,85,247,.15); color: #c084fc; }
+.status-preparing  { background: rgba(255,184,0,.15); color: var(--gold); }
+.status-ready      { background: rgba(34,197,94,.15); color: var(--green); }
+.status-out_for_delivery { background: rgba(255,77,45,.15); color: var(--accent); }
+.status-delivered  { background: rgba(34,197,94,.25); color: var(--green); }
+.status-cancelled  { background: rgba(239,68,68,.15); color: var(--red); }
+
+.timer-box{
+  margin-top: 12px; padding: 14px;
+  background: linear-gradient(135deg, rgba(255,77,45,.1), rgba(255,184,0,.05));
+  border: 1px solid rgba(255,77,45,.3);
+  border-radius: 14px; text-align: center;
+}
+.timer-label{ font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+.timer-value{
+  font-size: 34px; font-weight: 900; letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin: 4px 0;
+}
+.timer-value.done { color: var(--green); -webkit-text-fill-color: var(--green); }
+
+/* Timeline */
+.timeline{ display: flex; flex-direction: column; gap: 0; margin-top: 14px; }
+.tl-step{
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 8px 0; position: relative;
+}
+.tl-step:not(:last-child)::after{
+  content: ""; position: absolute; left: 13px; top: 34px;
+  width: 2px; height: calc(100% - 20px); background: var(--border2);
+}
+.tl-step.done:not(:last-child)::after { background: var(--green); }
+.tl-dot{
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg3); border: 2px solid var(--border2);
+  display: grid; place-items: center; flex-shrink: 0;
+  font-size: 13px; color: var(--text-dim);
+  transition: all .3s;
+}
+.tl-step.done .tl-dot{
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+.tl-step.current .tl-dot{
+  background: var(--accent); border-color: var(--accent); color: #fff;
+  box-shadow: 0 0 0 6px rgba(255,77,45,.2);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.tl-body { padding-top: 4px; }
+.tl-title { font-weight: 600; font-size: 13px; }
+.tl-time { font-size: 11px; color: var(--text-dim); }
+
+/* ============================================================
+   TRACKING MAP (SVG Simulation)
+   ============================================================ */
+.track-map{
+  position: relative; width: 100%; aspect-ratio: 16/10;
+  background:
+    linear-gradient(135deg, #0f172a, #111827),
+    repeating-linear-gradient(0deg, transparent 0 30px, rgba(255,255,255,.02) 30px 31px),
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(255,255,255,.02) 30px 31px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; margin-top: 14px;
+}
+.track-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-legend{
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(8px);
+  padding: 8px 12px; border-radius: 10px; font-size: 11px;
+  border: 1px solid var(--border);
+}
+.map-label{
+  position: absolute; padding: 4px 8px; border-radius: 8px;
+  font-size: 10px; font-weight: 700;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.map-label.restaurant { top: 12px; left: 12px; color: var(--gold); }
+.map-label.customer   { bottom: 12px; right: 12px; color: var(--green); }
+
+/* ============================================================
+   MOBILE BOTTOM NAV
+   ============================================================ */
+.bottom-nav{
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  background: rgba(10,10,10,.92);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 6px 0 max(6px, env(safe-area-inset-bottom));
+}
+.bottom-nav button{
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 4px; font-size: 10px; font-weight: 600;
+  color: var(--text-dim); transition: color .2s;
+}
+.bottom-nav button.active { color: var(--accent); }
+.bottom-nav .material-icons-round { font-size: 22px; }
+
+/* ============================================================
+   MODAL / TOAST / MISC
+   ============================================================ */
+.modal{
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(6px);
+  display: none; align-items: flex-end; justify-content: center;
+}
+.modal.show { display: flex; animation: fadeIn .2s; }
+.modal-content{
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 24px 24px 0 0;
+  padding: 20px 20px 28px;
+  width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+  animation: slideUp .3s ease;
+}
+@media (min-width: 640px){
+  .modal { align-items: center; }
+  .modal-content { border-radius: 24px; margin: 20px; }
+}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.modal-head{
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 18px;
+}
+.modal-head h3{ font-size: 20px; font-weight: 800; }
+.close-x{
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--bg3); display: grid; place-items: center;
+}
+
+.toast-wrap{
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+  z-index: 300; display: flex; flex-direction: column; gap: 8px;
+  width: calc(100% - 32px); max-width: 380px; pointer-events: none;
+}
+.toast{
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-left: 4px solid var(--accent);
+  padding: 12px 14px; border-radius: 12px; font-size: 13px;
+  font-weight: 500; box-shadow: var(--shadow-lg);
+  animation: slideDown .3s;
+  pointer-events: all;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.error { border-left-color: var(--red); }
+.toast.info { border-left-color: var(--blue); }
+@keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Tabs */
+.tabs{ display: flex; gap: 4px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab{
+  flex-shrink: 0; padding: 8px 14px; border-radius: 10px;
+  background: var(--bg3); font-size: 13px; font-weight: 600;
+  color: var(--text-dim); transition: all .2s; white-space: nowrap;
+}
+.tab.active { background: var(--accent); color: #fff; }
+
+/* Empty states */
+.empty{
+  padding: 50px 20px; text-align: center;
+  color: var(--text-dim); display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+}
+.empty .material-icons-round{ font-size: 60px; opacity: .3; }
+.empty h4 { font-size: 16px; font-weight: 600; color: var(--text); }
+
+/* Grid helpers */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.grid-3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 720px){ .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* ============================================================
+   ADMIN PANEL
+   ============================================================ */
+.admin-header{
+  background: linear-gradient(135deg, #1a0f0a, #0a0a0a);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px; position: sticky; top: 0; z-index: 90;
+}
+.admin-wrap{ max-width: 1200px; margin: 0 auto; padding: 16px; }
+.admin-title{
+  font-size: 22px; font-weight: 900; letter-spacing: -.5px;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.stat-card{
+  background: linear-gradient(135deg, var(--bg2), var(--bg3));
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px;
+}
+.stat-label{ font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
+.stat-value{ font-size: 26px; font-weight: 900; margin-top: 4px; letter-spacing: -.5px; }
+.stat-icon{
+  width: 34px; height: 34px; border-radius: 10px;
+  display: grid; place-items: center; margin-bottom: 8px;
+}
+
+/* Table */
+.tbl-wrap{ overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; background: var(--bg2); }
+th, td { padding: 10px 12px; text-align: left; font-size: 13px; white-space: nowrap; }
+th { background: var(--bg3); font-weight: 700; color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+tr:hover td { background: rgba(255,255,255,.02); }
+
+.pill {
+  display: inline-block; padding: 3px 9px; border-radius: 999px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.float-anim { animation: float 3s ease-in-out infinite; }
+
+/* Utility */
+.text-center { text-align: center; }
+.text-dim { color: var(--text-dim); }
+.text-sm { font-size: 12px; }
+.mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; }
+.flex { display: flex; } .flex-b { justify-content: space-between; } .flex-a { align-items: center; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; }
+.hidden { display: none !important; }
+
+/* Desktop: hide bottom nav, show desktop nav */
+@media (min-width: 768px){
+  body { padding-bottom: 0; }
+  .bottom-nav { display: none; }
+  .desktop-nav { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="app-header">
+  <div class="header-row">
+    <div class="brand" id="brandBtn" title="hyfun5656">
+      <div class="brand-logo" id="brandLogo">🍕</div>
+      <div>
+        <div class="brand-name" id="brandName">hyfun5656</div>
+        <div class="brand-tag" id="brandTag">Pizza Delivered Fast</div>
+      </div>
+    </div>
+
+    <nav class="desktop-nav" id="desktopNav">
+      <button data-page="home" class="active"><span class="material-icons-round">home</span> Home</button>
+      <button data-page="menu"><span class="material-icons-round">restaurant_menu</span> Menu</button>
+      <button data-page="orders"><span class="material-icons-round">receipt_long</span> Orders</button>
+      <button data-page="profile"><span class="material-icons-round">person</span> Profile</button>
+    </nav>
+
+    <div class="header-actions">
+      <span class="status-pill" id="openPill"><span class="dot"></span> Open</span>
+      <button class="icon-btn" id="cartBtn" title="Cart">
+        <span class="material-icons-round">shopping_cart</span>
+        <span class="badge hidden" id="cartBadge">0</span>
+      </button>
+      <button class="icon-btn" id="userBtn" title="Account">
+        <span class="material-icons-round" id="userIcon">person</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN APP (Customer pages)
+     ============================================================ -->
+<main id="appMain" class="container">
+
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <h1>Delicious <span>Pizza</span><br>Delivered To Your Door</h1>
+      <p id="heroTag">Hot, fresh and tasty — served with love. Order now and get it in 30 minutes.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary" data-page="menu">
+          <span class="material-icons-round">shopping_bag</span> Order Now
+        </button>
+        <button class="btn btn-ghost" data-page="menu">
+          <span class="material-icons-round">menu_book</span> View Menu
+        </button>
+      </div>
+    </div>
+
+    <h2 class="section-title"><span class="material-icons-round" style="color:var(--gold)">local_fire_department</span> Popular Now</h2>
+    <p class="section-sub">Customer favorites this week</p>
+    <div class="product-grid" id="popularGrid"></div>
+
+    <h2 class="section-title mt-4"><span class="material-icons-round" style="color:var(--accent)">bolt</span> Why Choose Us</h2>
+    <div class="grid-3 mb-4">
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(255,77,45,.15);color:var(--accent)"><span class="material-icons-round">delivery_dining</span></div><div class="stat-label">Fast Delivery</div><div class="stat-value" style="font-size:16px">30 min or less</div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(255,184,0,.15);color:var(--gold)"><span class="material-icons-round">verified</span></div><div class="stat-label">Fresh Food</div><div class="stat-value" style="font-size:16px">100% quality</div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:rgba(34,197,94,.15);color:var(--green)"><span class="material-icons-round">payments</span></div><div class="stat-label">Easy Payment</div><div class="stat-value" style="font-size:16px">COD & Online</div></div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="page" id="page-menu">
+    <h2 class="section-title">Our Menu</h2>
+    <p class="section-sub">Choose from our freshly prepared range</p>
+    <div class="cat-scroll" id="catChips"></div>
+    <div class="product-grid" id="menuGrid"></div>
+    <div class="empty" id="menuEmpty" style="display:none">
+      <span class="material-icons-round">search_off</span>
+      <h4>No products found</h4>
+      <p class="text-sm">Try a different category</p>
+    </div>
+  </section>
+
+  <!-- CART -->
+  <section class="page" id="page-cart">
+    <h2 class="section-title">Your Cart</h2>
+    <p class="section-sub">Review your items before checkout</p>
+    <div id="cartBody"></div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section class="page" id="page-checkout">
+    <h2 class="section-title">Checkout</h2>
+    <p class="section-sub">Confirm your delivery details</p>
+    <div id="checkoutBody"></div>
+  </section>
+
+  <!-- ORDERS -->
+  <section class="page" id="page-orders">
+    <h2 class="section-title">My Orders</h2>
+    <p class="section-sub">Track your order live</p>
+    <div id="ordersBody"></div>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="page" id="page-profile">
+    <h2 class="section-title">My Profile</h2>
+    <p class="section-sub">Manage your account details</p>
+    <div id="profileBody"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="page" id="page-about">
+    <h2 class="section-title">About Us</h2>
+    <div class="summary-card mb-4">
+      <p class="text-dim text-sm" style="line-height:1.7">
+        Welcome to <b id="aboutName">hyfun5656</b> — your neighbourhood pizza hub.
+        We serve hot, fresh, and delicious pizzas, burgers, pastas and more,
+        delivered fast to your doorstep. Made with premium ingredients and lot of love.
+      </p>
+    </div>
+    <h3 class="section-title">Contact Owner</h3>
+    <div class="summary-card" id="aboutContact"></div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     MOBILE BOTTOM NAV
+     ============================================================ -->
+<nav class="bottom-nav" id="bottomNav">
+  <button data-page="home" class="active"><span class="material-icons-round">home</span>Home</button>
+  <button data-page="menu"><span class="material-icons-round">restaurant_menu</span>Menu</button>
+  <button data-page="cart"><span class="material-icons-round">shopping_cart</span>Cart</button>
+  <button data-page="orders"><span class="material-icons-round">receipt_long</span>Orders</button>
+  <button data-page="profile"><span class="material-icons-round">person</span>Profile</button>
+</nav>
+
+<!-- ============================================================
+     ADMIN PANEL (hidden by default)
+     ============================================================ -->
+<div id="adminRoot" class="hidden">
+  <header class="admin-header">
+    <div class="admin-wrap flex flex-b flex-a" style="padding:0">
+      <div class="flex flex-a gap-2">
+        <span class="material-icons-round" style="color:var(--accent);font-size:28px">admin_panel_settings</span>
+        <div>
+          <div class="admin-title">Admin Panel</div>
+          <div class="text-sm text-dim" id="adminSub">hyfun5656 Restaurant</div>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <button class="icon-btn" id="adminViewSite" title="View site"><span class="material-icons-round">visibility</span></button>
+        <button class="icon-btn" id="adminLogout" title="Logout"><span class="material-icons-round">logout</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin login -->
+  <div id="adminLogin" class="admin-wrap">
+    <div class="summary-card" style="max-width:400px;margin:40px auto">
+      <div class="text-center mb-4">
+        <div class="brand-logo" style="width:64px;height:64px;font-size:32px;margin:0 auto 10px">🔐</div>
+        <h3 style="font-size:22px;font-weight:800">Admin Login</h3>
+        <p class="text-dim text-sm">Authorized access only</p>
+      </div>
+      <div class="field"><label>Username</label><input id="admUser" placeholder="admin" autocomplete="username"></div>
+      <div class="field"><label>Password</label><input id="admPass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+      <button class="btn btn-primary btn-block" id="admLoginBtn"><span class="material-icons-round">login</span> Login to Dashboard</button>
+      <p class="text-dim text-sm text-center mt-3">Default: admin / admin123</p>
+      <button class="btn btn-ghost btn-block mt-3" id="admBackBtn"><span class="material-icons-round">arrow_back</span> Back to Website</button>
+    </div>
+  </div>
+
+  <!-- Admin dashboard -->
+  <div id="adminDash" class="admin-wrap hidden">
+    <div class="tabs mb-4" id="adminTabs">
+      <button class="tab active" data-tab="dash"><span class="material-icons-round" style="font-size:16px">dashboard</span> Dashboard</button>
+      <button class="tab" data-tab="orders"><span class="material-icons-round" style="font-size:16px">receipt_long</span> Orders</button>
+      <button class="tab" data-tab="products"><span class="material-icons-round" style="font-size:16px">local_pizza</span> Products</button>
+      <button class="tab" data-tab="categories"><span class="material-icons-round" style="font-size:16px">category</span> Categories</button>
+      <button class="tab" data-tab="customers"><span class="material-icons-round" style="font-size:16px">people</span> Customers</button>
+      <button class="tab" data-tab="offers"><span class="material-icons-round" style="font-size:16px">local_offer</span> Offers</button>
+      <button class="tab" data-tab="settings"><span class="material-icons-round" style="font-size:16px">settings</span> Settings</button>
+    </div>
+
+    <div id="adminPane"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODALS & TOASTS
+     ============================================================ -->
+<div class="modal" id="authModal">
+  <div class="modal-content">
+    <div class="modal-head">
+      <h3 id="authTitle">Login</h3>
+      <button class="close-x" id="authClose"><span class="material-icons-round">close</span></button>
+    </div>
+    <div id="authBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="genericModal">
+  <div class="modal-content">
+    <div class="modal-head">
+      <h3 id="genTitle">Details</h3>
+      <button class="close-x" id="genClose"><span class="material-icons-round">close</span></button>
+    </div>
+    <div id="genBody"></div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   hyfun5656 — Full Application JavaScript
+   All data persists in localStorage (browser mein safe rehta hai)
+   ============================================================ */
+
+/* ---------- Storage helper ---------- */
+const DB = {
+  get(k, def){ try { const v = localStorage.getItem('hyfun5656_'+k); return v ? JSON.parse(v) : def; } catch(e){ return def; } },
+  set(k, v){ localStorage.setItem('hyfun5656_'+k, JSON.stringify(v)); },
+  del(k){ localStorage.removeItem('hyfun5656_'+k); }
+};
+
+/* ---------- Default Settings ---------- */
+const DEFAULT_SETTINGS = {
+  restaurantName: 'hyfun5656',
+  tagline: 'Pizza Delivered Fast',
+  phone: '+91 98765 43210',
+  email: 'hello@hyfun5656.com',
+  address: '123 Pizza Lane, Mumbai, India',
+  instagram: 'hyfun5656',
+  facebook: '',
+  whatsapp: '+919876543210',
+  logo: '',
+  isOpen: true,
+  onlinePayment: true,
+  deliveryCharge: 40,
+  freeDeliveryAbove: 499,
+  deliveryTime: 30,
+  adminUsername: 'admin',
+  adminPassword: 'admin123'
+};
+
+/* ---------- Default Categories ---------- */
+const DEFAULT_CATEGORIES = ['Pizza','Burger','Pasta','Garlic Bread','Beverages','Combos','Desserts'];
+
+/* ---------- Default Demo Products ---------- */
+const DEFAULT_PRODUCTS = [
+  { name:'Margherita Pizza', category:'Pizza', price:199, discountPrice:149, veg:true, sizes:['Small','Medium','Large'],
+    description:'Classic delight with 100% real mozzarella cheese & tomatoes',
+    image:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&auto=format&fit=crop' },
+  { name:'Farmhouse Pizza', category:'Pizza', price:279, discountPrice:229, veg:true, sizes:['Small','Medium','Large'],
+    description:'Delightful combination of onion, capsicum, tomato & mushroom',
+    image:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop' },
+  { name:'Peppy Paneer Pizza', category:'Pizza', price:299, discountPrice:249, veg:true, sizes:['Small','Medium','Large'],
+    description:'Chunky paneer with crisp capsicum, spicy red paprika',
+    image:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop' },
+  { name:'Cheese Burst Pizza', category:'Pizza', price:349, discountPrice:299, veg:true, sizes:['Medium','Large'],
+    description:'Loaded with extra cheese in every bite',
+    image:'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&auto=format&fit=crop' },
+  { name:'Chicken Tikka Pizza', category:'Pizza', price:369, discountPrice:319, veg:false, sizes:['Small','Medium','Large'],
+    description:'Tandoori chicken tikka with onion & capsicum',
+    image:'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=500&auto=format&fit=crop' },
+  { name:'Veggie Paradise', category:'Pizza', price:259, discountPrice:209, veg:true, sizes:['Small','Medium','Large'],
+    description:'Loaded with golden corn, black olives, capsicum, onion',
+    image:'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&auto=format&fit=crop' },
+  { name:'Classic Burger', category:'Burger', price:149, discountPrice:99, veg:true, sizes:[],
+    description:'Aloo tikki patty with fresh veggies & sauces',
+    image:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&auto=format&fit=crop' },
+  { name:'Chicken Burger', category:'Burger', price:199, discountPrice:159, veg:false, sizes:[],
+    description:'Crispy chicken patty with cheese & lettuce',
+    image:'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&auto=format&fit=crop' },
+  { name:'White Sauce Pasta', category:'Pasta', price:199, discountPrice:169, veg:true, sizes:[],
+    description:'Creamy white sauce pasta with herbs',
+    image:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&auto=format&fit=crop' },
+  { name:'Red Sauce Pasta', category:'Pasta', price:189, discountPrice:159, veg:true, sizes:[],
+    description:'Tangy tomato pasta with Italian herbs',
+    image:'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500&auto=format&fit=crop' },
+  { name:'Garlic Breadsticks', category:'Garlic Bread', price:109, discountPrice:89, veg:true, sizes:[],
+    description:'Buttery garlic breadsticks with herbs',
+    image:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&auto=format&fit=crop' },
+  { name:'Cheesy Garlic Bread', category:'Garlic Bread', price:139, discountPrice:119, veg:true, sizes:[],
+    description:'Garlic bread topped with mozzarella cheese',
+    image:'https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=500&auto=format&fit=crop' },
+  { name:'Coke (500ml)', category:'Beverages', price:60, discountPrice:0, veg:true, sizes:[],
+    description:'Chilled Coca-Cola bottle',
+    image:'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&auto=format&fit=crop' },
+  { name:'Fresh Lime Soda', category:'Beverages', price:80, discountPrice:0, veg:true, sizes:[],
+    description:'Refreshing lime soda with mint',
+    image:'https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=500&auto=format&fit=crop' },
+  { name:'Family Combo Meal', category:'Combos', price:899, discountPrice:699, veg:true, sizes:[],
+    description:'2 Large Pizzas + Garlic Bread + 2 Coke',
+    image:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop' },
+  { name:'Choco Lava Cake', category:'Desserts', price:99, discountPrice:79, veg:true, sizes:[],
+    description:'Warm molten chocolate cake',
+    image:'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop' }
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = {
+  settings: DB.get('settings', {...DEFAULT_SETTINGS}),
+  categories: DB.get('categories', [...DEFAULT_CATEGORIES]),
+  products: DB.get('products', []),
+  users: DB.get('users', []),
+  orders: DB.get('orders', []),
+  offers: DB.get('offers', []),
+  cart: DB.get('cart', []),
+  session: DB.get('session', null),       // customer session: { userId }
+  adminSession: DB.get('adminSession', false),
+  notifications: DB.get('notifications', []),
+  loginActivity: DB.get('loginActivity', []),
+  currentPage: 'home',
+  currentCategory: 'All',
+  adminTab: 'dash'
+};
+
+/* Ensure products exist (first-run seeding) */
+if (!state.products.length){
+  state.products = DEFAULT_PRODUCTS.map((p,i) => ({
+    id: 'P' + Date.now() + i,
+    ...p,
+    available: true,
+    createdAt: Date.now()
+  }));
+  DB.set('products', state.products);
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+
+function save(){ 
+  DB.set('settings', state.settings);
+  DB.set('categories', state.categories);
+  DB.set('products', state.products);
+  DB.set('users', state.users);
+  DB.set('orders', state.orders);
+  DB.set('offers', state.offers);
+  DB.set('cart', state.cart);
+  DB.set('session', state.session);
+  DB.set('adminSession', state.adminSession);
+  DB.set('notifications', state.notifications);
+  DB.set('loginActivity', state.loginActivity);
+}
+
+function uid(prefix=''){ return prefix + Math.random().toString(36).slice(2,9) + Date.now().toString(36).slice(-4); }
+
+function toast(msg, type='info'){
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  $('#toastWrap').appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),300); }, 2600);
+}
+
+function money(n){ return '₹' + Number(n || 0).toLocaleString('en-IN'); }
+
+function escapeHTML(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+
+function fmtDate(ts){
+  const d = new Date(ts);
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+function fmtTime(ts){
+  const d = new Date(ts);
+  return d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
+}
+function fmtDateTime(ts){ return fmtDate(ts) + ' • ' + fmtTime(ts); }
+
+/* Generate Order ID — HF + YYYYMMDD + serial */
+function generateOrderId(){
+  const d = new Date();
+  const ymd = d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+  const todayCount = state.orders.filter(o => o.createdAt && new Date(o.createdAt).toDateString() === d.toDateString()).length;
+  return 'HF' + ymd + String(todayCount + 1).padStart(3,'0');
+}
+
+/* ============================================================
+   SETTINGS APPLY (theme, brand, status)
+   ============================================================ */
+function applySettings(){
+  const s = state.settings;
+  $('#brandName').textContent = s.restaurantName || 'hyfun5656';
+  $('#brandTag').textContent  = s.tagline || 'Pizza Delivered Fast';
+  $('#aboutName').textContent = s.restaurantName || 'hyfun5656';
+  $('#heroTag').textContent   = s.tagline || 'Hot, fresh and tasty — served with love.';
+
+  // Logo
+  const logoEl = $('#brandLogo');
+  if (s.logo) logoEl.innerHTML = '<img src="' + escapeHTML(s.logo) + '" alt="logo">';
+  else logoEl.textContent = '🍕';
+
+  // Open/Closed pill
+  const pill = $('#openPill');
+  if (s.isOpen){ pill.className = 'status-pill'; pill.innerHTML = '<span class="dot"></span> Open'; }
+  else { pill.className = 'status-pill closed'; pill.innerHTML = '<span class="dot"></span> Closed'; }
+
+  // Title
+  document.title = (s.restaurantName || 'hyfun5656') + ' — ' + (s.tagline || 'Pizza Delivered Fast');
+
+  // About contact
+  const ig = s.instagram || '';
+  const igLink = ig ? (ig.startsWith('http') ? ig : `https://instagram.com/${ig.replace('@','')}`) : '#';
+  $('#aboutContact').innerHTML = `
+    <div class="flex flex-b flex-a mb-3">
+      <div class="flex flex-a gap-2"><span class="material-icons-round" style="color:var(--accent)">phone</span><span>Phone</span></div>
+      <a href="tel:${escapeHTML(s.phone)}" style="color:var(--gold);font-weight:600">${escapeHTML(s.phone || '—')}</a>
+    </div>
+    <div class="flex flex-b flex-a mb-3">
+      <div class="flex flex-a gap-2"><span class="material-icons-round" style="color:var(--accent)">mail</span><span>Email</span></div>
+      <a href="mailto:${escapeHTML(s.email)}" style="color:var(--gold);font-weight:600">${escapeHTML(s.email || '—')}</a>
+    </div>
+    <div class="flex flex-b flex-a mb-3">
+      <div class="flex flex-a gap-2"><span class="material-icons-round" style="color:var(--accent)">place</span><span>Address</span></div>
+      <span class="text-sm" style="max-width:55%;text-align:right">${escapeHTML(s.address || '—')}</span>
+    </div>
+    ${ig ? `
+    <div class="flex flex-b flex-a mb-3">
+      <div class="flex flex-a gap-2"><span class="material-icons-round" style="color:var(--accent)">photo_camera</span><span>Instagram</span></div>
+      <a href="${escapeHTML(igLink)}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">@${escapeHTML(ig.replace('@',''))}</a>
+    </div>` : ''}
+    ${s.whatsapp ? `
+    <div class="flex flex-b flex-a">
+      <div class="flex flex-a gap-2"><span class="material-icons-round" style="color:var(--green)">chat</span><span>WhatsApp</span></div>
+      <a href="https://wa.me/${escapeHTML(String(s.whatsapp).replace(/\D/g,''))}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600">Chat Now</a>
+    </div>` : ''}
+  `;
+}
+
+/* ============================================================
+   CUSTOMER — PRODUCT RENDERING
+   ============================================================ */
+function productCardHTML(p){
+  const price = p.discountPrice > 0 ? p.discountPrice : p.price;
+  const off = p.discountPrice > 0 && p.price > 0 ? Math.round((1 - p.discountPrice / p.price) * 100) : 0;
+  const sizes = Array.isArray(p.sizes) ? p.sizes : [];
+  return `
+    <div class="product-card">
+      <img class="product-img" src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" loading="lazy"
+           onerror="this.src='https://via.placeholder.com/400x400/1a1a1a/ff4d2d?text=Pizza'">
+      <div class="product-body">
+        <div class="product-badges">
+          <span class="badge-tag ${p.veg ? 'badge-veg' : 'badge-nonveg'}">${p.veg ? 'Veg' : 'Non-Veg'}</span>
+          ${off > 0 ? `<span class="badge-tag badge-off">${off}% OFF</span>` : ''}
+        </div>
+        <div class="product-name">${escapeHTML(p.name)}</div>
+        <div class="product-desc">${escapeHTML(p.description || '')}</div>
+        ${sizes.length ? `
+          <select class="size-select" id="size-${p.id}">
+            ${sizes.map(s => `<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join('')}
+          </select>` : ''}
+        <div class="product-price-row">
+          <div class="price">
+            <span class="now">${money(price)}</span>
+            ${off > 0 ? `<span class="was">${money(p.price)}</span>` : ''}
+          </div>
+        </div>
+        <button class="add-btn" data-add="${p.id}">
+          <span class="material-icons-round" style="font-size:16px">add_shopping_cart</span> Add
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function renderPopular(){
+  const list = state.products.filter(p => p.available).slice(0, 8);
+  $('#popularGrid').innerHTML = list.length ? list.map(productCardHTML).join('') :
+    `<div class="empty" style="grid-column:1/-1"><span class="material-icons-round">local_pizza</span><h4>No products yet</h4></div>`;
+}
+
+function renderMenu(){
+  // Category chips
+  const cats = ['All', ...state.categories];
+  $('#catChips').innerHTML = cats.map(c =>
+    `<button class="cat-chip ${state.currentCategory === c ? 'active' : ''}" data-cat="${escapeHTML(c)}">${escapeHTML(c)}</button>`
+  ).join('');
+
+  const list = state.products.filter(p => p.available && (state.currentCategory === 'All' || p.category === state.currentCategory));
+  $('#menuGrid').innerHTML = list.map(productCardHTML).join('');
+  $('#menuEmpty').style.display = list.length ? 'none' : 'flex';
+}
+
+/* ============================================================
+   CART
+   ============================================================ */
+function cartCount(){ return state.cart.reduce((s,i) => s + i.qty, 0); }
+
+function updateCartBadge(){
+  const badge = $('#cartBadge');
+  const c = cartCount();
+  if (c > 0){ badge.textContent = c; badge.classList.remove('hidden'); }
+  else badge.classList.add('hidden');
+}
+
+function addToCart(pid){
+  const p = state.products.find(x => x.id === pid);
+  if (!p) return;
+  if (!state.settings.isOpen){ toast('Restaurant is currently closed', 'error'); return; }
+  const sizeEl = document.getElementById('size-' + pid);
+  const size = sizeEl ? sizeEl.value : '';
+  const key = pid + '|' + size;
+  const existing = state.cart.find(i => i.key === key);
+  const price = p.discountPrice > 0 ? p.discountPrice : p.price;
+  if (existing) existing.qty++;
+  else state.cart.push({ key, productId: pid, name: p.name, image: p.image, price, size, qty: 1 });
+  save(); updateCartBadge();
+  toast(p.name + ' added to cart', 'success');
+  renderCart();
+}
+
+function changeQty(key, delta){
+  const item = state.cart.find(i => i.key === key);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) state.cart = state.cart.filter(i => i.key !== key);
+  save(); updateCartBadge(); renderCart();
+}
+
+function removeCartItem(key){
+  state.cart = state.cart.filter(i => i.key !== key);
+  save(); updateCartBadge(); renderCart();
+  toast('Item removed', 'info');
+}
+
+function cartTotals(offerDiscount=0){
+  const subtotal = state.cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const s = state.settings;
+  let delivery = subtotal > 0 ? s.deliveryCharge : 0;
+  if (subtotal >= s.freeDeliveryAbove) delivery = 0;
+  const discount = offerDiscount || 0;
+  const total = Math.max(0, subtotal + delivery - discount);
+  return { subtotal, delivery, discount, total };
+}
+
+function renderCart(){
+  const wrap = $('#cartBody');
+  if (!state.cart.length){
+    wrap.innerHTML = `
+      <div class="empty">
+        <span class="material-icons-round">shopping_cart</span>
+        <h4>Your cart is empty</h4>
+        <p class="text-sm">Add some delicious items to get started</p>
+        <button class="btn btn-primary mt-3" data-page="menu"><span class="material-icons-round">restaurant_menu</span> Browse Menu</button>
+      </div>`;
+    return;
+  }
+  const t = cartTotals();
+  wrap.innerHTML = `
+    <div class="cart-list mb-4">
+      ${state.cart.map(i => `
+        <div class="cart-item">
+          <img src="${escapeHTML(i.image)}" onerror="this.src='https://via.placeholder.com/150/1a1a1a/ff4d2d?text=Item'">
+          <div class="cart-item-body">
+            <div class="cart-item-name">${escapeHTML(i.name)}</div>
+            ${i.size ? `<div class="cart-item-meta">Size: ${escapeHTML(i.size)}</div>` : ''}
+            <div class="cart-item-meta">${money(i.price)} × ${i.qty}</div>
+            <div class="cart-item-row">
+              <div class="qty-row" style="margin:0">
+                <button class="qty-btn" data-qty="${i.key}" data-d="-1">−</button>
+                <span class="qty-val">${i.qty}</span>
+                <button class="qty-btn" data-qty="${i.key}" data-d="1">+</button>
+              </div>
+              <div class="flex gap-2">
+                <div class="price"><span class="now">${money(i.price * i.qty)}</span></div>
+                <button class="icon-btn" style="width:34px;height:34px" data-rm="${i.key}"><span class="material-icons-round" style="color:var(--red);font-size:18px">delete</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="summary-card">
+      <div class="summary-row"><span>Subtotal</span><span style="color:var(--text)">${money(t.subtotal)}</span></div>
+      <div class="summary-row"><span>Delivery</span><span style="color:${t.delivery ? 'var(--text)' : 'var(--green)'}">${t.delivery ? money(t.delivery) : 'FREE'}</span></div>
+      <div class="summary-row total"><span>Total</span><span class="amt">${money(t.total)}</span></div>
+      <button class="btn btn-primary btn-block mt-3" data-page="checkout">
+        <span class="material-icons-round">shopping_bag</span> Proceed to Checkout
+      </button>
+    </div>`;
+}
+
+/* ============================================================
+   CHECKOUT
+   ============================================================ */
+let appliedOffer = null;
+
+function renderCheckout(){
+  if (!state.cart.length){
+    $('#checkoutBody').innerHTML = `<div class="empty"><span class="material-icons-round">shopping_cart</span><h4>Cart is empty</h4><button class="btn btn-primary mt-2" data-page="menu">Browse Menu</button></div>`;
+    return;
+  }
+  const user = state.session ? state.users.find(u => u.id === state.session.userId) : null;
+  const t = cartTotals(appliedOffer ? appliedOffer.discountAmount : 0);
+  const s = state.settings;
+
+  $('#checkoutBody').innerHTML = `
+    <div class="grid-2" style="grid-template-columns:1fr">
+      <div>
+        <div class="summary-card mb-3">
+          <h3 style="font-weight:800;margin-bottom:12px">Delivery Details</h3>
+          <div class="field"><label>Full Name</label><input id="ckName" value="${escapeHTML(user?.name || '')}" placeholder="Your name"></div>
+          <div class="field"><label>Mobile Number</label><input id="ckPhone" value="${escapeHTML(user?.phone || '')}" placeholder="10-digit mobile" inputmode="tel"></div>
+          <div class="field"><label>Delivery Address</label><textarea id="ckAddr" placeholder="House no, street, area, city, pincode">${escapeHTML(user?.address || '')}</textarea></div>
+        </div>
+
+        <div class="summary-card mb-3">
+          <h3 style="font-weight:800;margin-bottom:12px">Payment Method</h3>
+          <div class="field" style="margin-bottom:8px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px;background:var(--bg3);border-radius:10px;border:1px solid var(--border)">
+              <input type="radio" name="pay" value="COD" checked style="width:auto">
+              <span class="material-icons-round" style="color:var(--green)">payments</span>
+              <span style="color:var(--text);font-weight:600">Cash on Delivery</span>
+            </label>
+          </div>
+          ${s.onlinePayment ? `
+          <div class="field" style="margin-bottom:0">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px;background:var(--bg3);border-radius:10px;border:1px solid var(--border)">
+              <input type="radio" name="pay" value="ONLINE" style="width:auto">
+              <span class="material-icons-round" style="color:var(--blue)">credit_card</span>
+              <span style="color:var(--text);font-weight:600">Online Payment</span>
+            </label>
+          </div>` : ''}
+        </div>
+
+        <div class="summary-card mb-3">
+          <h3 style="font-weight:800;margin-bottom:12px">Have a coupon?</h3>
+          <div class="flex gap-2">
+            <input id="ckCoupon" placeholder="Enter code" style="flex:1;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:14px">
+            <button class="btn btn-gold" id="ckApply">Apply</button>
+          </div>
+          ${appliedOffer ? `<div class="text-sm mt-2" style="color:var(--green)">✓ ${escapeHTML(appliedOffer.name)} applied — you save ${money(appliedOffer.discountAmount)}</div>` : ''}
+        </div>
+      </div>
+
+      <div>
+        <div class="summary-card">
+          <h3 style="font-weight:800;margin-bottom:12px">Order Summary</h3>
+          ${state.cart.map(i => `
+            <div class="summary-row" style="align-items:flex-start">
+              <span>${escapeHTML(i.name)}${i.size ? ' <span class="text-sm">(' + escapeHTML(i.size) + ')</span>' : ''} × ${i.qty}</span>
+              <span style="color:var(--text);white-space:nowrap;margin-left:10px">${money(i.price * i.qty)}</span>
+            </div>
+          `).join('')}
+          <div class="summary-row" style="border-top:1px dashed var(--border2);margin-top:6px"><span>Subtotal</span><span style="color:var(--text)">${money(t.subtotal)}</span></div>
+          <div class="summary-row"><span>Delivery</span><span style="color:${t.delivery ? 'var(--text)' : 'var(--green)'}">${t.delivery ? money(t.delivery) : 'FREE'}</span></div>
+          ${t.discount > 0 ? `<div class="summary-row" style="color:var(--green)"><span>Discount</span><span>− ${money(t.discount)}</span></div>` : ''}
+          <div class="summary-row total"><span>Grand Total</span><span class="amt">${money(t.total)}</span></div>
+          <button class="btn btn-primary btn-block mt-3" id="placeOrderBtn">
+            <span class="material-icons-round">check_circle</span> Place Order
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function applyCoupon(){
+  const code = ($('#ckCoupon').value || '').trim().toUpperCase();
+  if (!code){ toast('Enter a coupon code', 'error'); return; }
+  const now = Date.now();
+  const offer = state.offers.find(o =>
+    o.active && o.code.toUpperCase() === code &&
+    now >= new Date(o.startDate).getTime() &&
+    now <= new Date(o.endDate).getTime() + 86400000
+  );
+  if (!offer){ toast('Invalid or expired coupon', 'error'); return; }
+  const subtotal = state.cart.reduce((s,i) => s + i.price * i.qty, 0);
+  if (subtotal < offer.minOrder){ toast('Minimum order ' + money(offer.minOrder) + ' required', 'error'); return; }
+  const discountAmount = Math.round(subtotal * offer.discount / 100);
+  appliedOffer = { ...offer, discountAmount };
+  toast('Coupon applied! You saved ' + money(discountAmount), 'success');
+  renderCheckout();
+}
+
+function placeOrder(){
+  if (!state.settings.isOpen){ toast('Restaurant is currently closed', 'error'); return; }
+  const name = $('#ckName').value.trim();
+  const phone = $('#ckPhone').value.trim();
+  const addr = $('#ckAddr').value.trim();
+  const payEl = document.querySelector('input[name="pay"]:checked');
+  const pay = payEl ? payEl.value : 'COD';
+
+  if (name.length < 2){ toast('Please enter your name', 'error'); return; }
+  if (!/^[0-9]{10}$/.test(phone.replace(/\D/g,'').slice(-10))){ toast('Enter a valid 10-digit mobile', 'error'); return; }
+  if (addr.length < 8){ toast('Please enter a complete address', 'error'); return; }
+
+  const t = cartTotals(appliedOffer ? appliedOffer.discountAmount : 0);
+  const createdAt = Date.now();
+  const estDelivery = createdAt + state.settings.deliveryTime * 60 * 1000;
+
+  const order = {
+    id: uid('O_'),
+    orderId: generateOrderId(),
+    userId: state.session ? state.session.userId : null,
+    customerName: name,
+    phone, address: addr,
+    items: JSON.parse(JSON.stringify(state.cart)),
+    subtotal: t.subtotal,
+    delivery: t.delivery,
+    discount: t.discount,
+    total: t.total,
+    payment: pay,
+    status: 'received',
+    createdAt,
+    estimatedDelivery: estDelivery,
+    deliveredAt: null,
+    statusHistory: [{ status:'received', at: createdAt }],
+    appliedOffer: appliedOffer ? { code: appliedOffer.code, name: appliedOffer.name } : null
+  };
+
+  state.orders.unshift(order);
+
+  // Save address to user profile
+  if (state.session){
+    const u = state.users.find(x => x.id === state.session.userId);
+    if (u){ u.name = name; u.phone = phone; u.address = addr; }
+  }
+
+  // Notify admin (system notification)
+  state.notifications.unshift({
+    id: uid('N_'),
+    type: 'admin',
+    title: 'New Order ' + order.orderId,
+    message: name + ' placed an order of ' + money(order.total),
+    createdAt,
+    read: false
+  });
+
+  // Cart clear
+  state.cart = [];
+  appliedOffer = null;
+  save();
+  updateCartBadge();
+
+  toast('Order placed! ' + order.orderId, 'success');
+  go('orders');
+}
+
+/* ============================================================
+   ORDERS (Customer) — timer, tracking
+   ============================================================ */
+let timerInterval = null;
+
+function myOrders(){
+  if (!state.session) return [];
+  return state.orders.filter(o => o.userId === state.session.userId);
+}
+
+function renderOrders(){
+  if (!state.session){
+    $('#ordersBody').innerHTML = `
+      <div class="empty">
+        <span class="material-icons-round">login</span>
+        <h4>Please login to see your orders</h4>
+        <button class="btn btn-primary mt-3" data-auth="login"><span class="material-icons-round">login</span> Login / Signup</button>
+      </div>`;
+    return;
+  }
+  const list = myOrders();
+  if (!list.length){
+    $('#ordersBody').innerHTML = `
+      <div class="empty">
+        <span class="material-icons-round">receipt_long</span>
+        <h4>No orders yet</h4>
+        <p class="text-sm">Your orders will appear here</p>
+        <button class="btn btn-primary mt-3" data-page="menu"><span class="material-icons-round">restaurant_menu</span> Order Now</button>
+      </div>`;
+    return;
+  }
+
+  const current = list.find(o => !['delivered','cancelled'].includes(o.status));
+  const past = list.filter(o => ['delivered','cancelled'].includes(o.status));
+
+  $('#ordersBody').innerHTML = `
+    ${current ? `<h3 class="section-title" style="font-size:17px"><span class="material-icons-round" style="color:var(--accent)">local_shipping</span> Current Order</h3>${renderOrderCard(current, true)}` : ''}
+    ${past.length ? `<h3 class="section-title" style="font-size:17px;margin-top:20px"><span class="material-icons-round" style="color:var(--green)">history</span> Order History</h3>${past.map(o => renderOrderCard(o, false)).join('')}` : ''}
+  `;
+  startTimer();
+}
+
+function renderOrderCard(o, isCurrent){
+  const steps = [
+    { key:'received', label:'Order Placed', icon:'receipt' },
+    { key:'confirmed', label:'Order Confirmed', icon:'thumb_up' },
+    { key:'preparing', label:'Preparing', icon:'outdoor_grill' },
+    { key:'ready', label:'Ready', icon:'check_circle' },
+    { key:'out_for_delivery', label:'Out for Delivery', icon:'delivery_dining' },
+    { key:'delivered', label:'Delivered', icon:'home' }
+  ];
+  const statusOrder = steps.map(s => s.key);
+  const cancelled = o.status === 'cancelled';
+  const currentIdx = cancelled ? -1 : statusOrder.indexOf(o.status);
+
+  return `
+    <div class="order-card" data-order="${o.id}">
+      <div class="order-head">
+        <div>
+          <div class="order-id">${escapeHTML(o.orderId)}</div>
+          <div class="order-date">${fmtDateTime(o.createdAt)}</div>
+        </div>
+        <span class="order-status status-${o.status}">${(o.status === 'out_for_delivery' ? 'Out for Delivery' : o.status).replace(/_/g,' ').replace(/\b\w/g, c => c.toUpperCase())}</span>
+      </div>
+
+      <div class="text-sm text-dim mb-2">${o.items.map(i => escapeHTML(i.name) + ' × ' + i.qty).join(', ')}</div>
+      <div class="flex flex-b flex-a">
+        <div class="text-sm text-dim">Total: <b style="color:var(--text)">${money(o.total)}</b> • ${escapeHTML(o.payment)}</div>
+      </div>
+
+      ${isCurrent && !cancelled ? `
+        <div class="timer-box">
+          <div class="timer-label">Estimated Delivery Time</div>
+          <div class="timer-value" id="timer-${o.id}" data-est="${o.estimatedDelivery}">--:--</div>
+          <div class="text-sm text-dim">Order placed at ${fmtTime(o.createdAt)} • Expected by ${fmtTime(o.estimatedDelivery)}</div>
+        </div>
+
+        ${o.status === 'out_for_delivery' ? renderTrackingMap(o) : ''}
+
+        <div class="timeline mt-3">
+          ${steps.map((s, idx) => {
+            const done = idx <= currentIdx;
+            const isCur = idx === currentIdx;
+            const hist = o.statusHistory.find(h => h.status === s.key);
+            return `
+              <div class="tl-step ${done ? 'done' : ''} ${isCur ? 'current' : ''}">
+                <div class="tl-dot"><span class="material-icons-round" style="font-size:14px">${done ? 'check' : s.icon}</span></div>
+                <div class="tl-body">
+                  <div class="tl-title">${s.label}</div>
+                  ${hist ? `<div class="tl-time">${fmtTime(hist.at)}</div>` : ''}
+                </div>
+              </div>`;
+          }).join('')}
+        </div>
+      ` : `
+        <div class="text-sm text-dim mt-2">${cancelled ? '❌ Cancelled' : '✅ Delivered on ' + fmtDateTime(o.deliveredAt)}</div>
+      `}
+    </div>`;
+}
+
+function renderTrackingMap(o){
+  return `
+    <div class="track-map" id="map-${o.id}">
+      <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+        <!-- decorative roads -->
+        <path d="M 40 200 Q 120 140 200 150 T 360 60" stroke="#2a3a5a" stroke-width="22" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M 40 200 Q 120 140 200 150 T 360 60" stroke="#4a5a7a" stroke-width="2" stroke-dasharray="8 8" fill="none"/>
+        <!-- start -->
+        <circle cx="40" cy="200" r="8" fill="#ffb800" opacity="0.4"/>
+        <circle cx="40" cy="200" r="5" fill="#ffb800"/>
+        <!-- end -->
+        <circle cx="360" cy="60" r="8" fill="#22c55e" opacity="0.4"/>
+        <circle cx="360" cy="60" r="5" fill="#22c55e"/>
+        <!-- scooter (animated) -->
+        <g id="scooter-${o.id}">
+          <circle r="13" fill="#ff4d2d" opacity="0.25"/>
+          <text x="0" y="6" text-anchor="middle" font-size="20">🛵</text>
+        </g>
+      </svg>
+      <div class="map-label restaurant">📍 Restaurant</div>
+      <div class="map-label customer">🏠 Customer</div>
+      <div class="map-legend">🛵 Your order is on the way!</div>
+    </div>`;
+}
+
+/* Animate scooter along the path */
+function animateScooter(orderId){
+  const scooter = document.getElementById('scooter-' + orderId);
+  if (!scooter) return;
+  const path = document.querySelector(`#map-${orderId} path`);
+  if (!path) return;
+  const len = path.getTotalLength();
+  let progress = 0;
+  const SPEED = 0.0025; // per frame
+  function loop(){
+    if (!document.body.contains(scooter)) return; // stop if removed
+    progress = (progress + SPEED) % 1;
+    const pt = path.getPointAtLength(len * progress);
+    scooter.setAttribute('transform', `translate(${pt.x},${pt.y})`);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+/* 30-minute countdown timer */
+function startTimer(){
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimers, 1000);
+  updateTimers();
+}
+function updateTimers(){
+  document.querySelectorAll('.timer-value').forEach(el => {
+    const est = Number(el.dataset.est);
+    if (!est) return;
+    const remain = est - Date.now();
+    if (remain <= 0){
+      el.textContent = 'Estimated delivery time completed';
+      el.classList.add('done');
+      el.style.fontSize = '14px';
+      el.style.letterSpacing = '0';
+    } else {
+      const m = Math.floor(remain / 60000);
+      const s = Math.floor((remain % 60000) / 1000);
+      el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }
+  });
+  // Scooter animations for out_for_delivery
+  document.querySelectorAll('.track-map').forEach(m => {
+    const id = m.id.replace('map-','');
+    if (!m.dataset.animStarted){
+      m.dataset.animStarted = '1';
+      animateScooter(id);
+    }
+  });
+}
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+function renderProfile(){
+  if (!state.session){
+    $('#profileBody').innerHTML = `
+      <div class="empty">
+        <span class="material-icons-round">person</span>
+        <h4>Login to view profile</h4>
+        <button class="btn btn-primary mt-3" data-auth="login"><span class="material-icons-round">login</span> Login / Signup</button>
+      </div>`;
+    return;
+  }
+  const u = state.users.find(x => x.id === state.session.userId);
+  if (!u){
+    $('#profileBody').innerHTML = `<div class="empty"><h4>Session expired</h4><button class="btn btn-primary mt-2" data-auth="login">Login again</button></div>`;
+    return;
+  }
+  const myOrds = myOrders();
+  $('#profileBody').innerHTML = `
+    <div class="summary-card mb-3">
+      <div class="flex flex-a gap-3 mb-3">
+        <div class="brand-logo" style="width:60px;height:60px;font-size:28px">${escapeHTML(u.name[0]?.toUpperCase() || 'U')}</div>
+        <div>
+          <div style="font-size:18px;font-weight:800">${escapeHTML(u.name)}</div>
+          <div class="text-sm text-dim">${escapeHTML(u.email || u.phone)}</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="stat-card" style="padding:10px"><div class="stat-label">Orders</div><div class="stat-value" style="font-size:20px">${myOrds.length}</div></div>
+        <div class="stat-card" style="padding:10px"><div class="stat-label">Member Since</div><div class="stat-value" style="font-size:14px">${fmtDate(u.createdAt)}</div></div>
+      </div>
+    </div>
+
+    <div class="summary-card mb-3">
+      <h3 style="font-weight:800;margin-bottom:12px">Edit Profile</h3>
+      <div class="field"><label>Full Name</label><input id="pfName" value="${escapeHTML(u.name)}"></div>
+      <div class="field"><label>Mobile</label><input id="pfPhone" value="${escapeHTML(u.phone)}" inputmode="tel"></div>
+      <div class="field"><label>Email</label><input id="pfEmail" value="${escapeHTML(u.email||'')}" inputmode="email"></div>
+      <div class="field"><label>Address</label><textarea id="pfAddr">${escapeHTML(u.address||'')}</textarea></div>
+      <button class="btn btn-primary btn-block" id="pfSave"><span class="material-icons-round">save</span> Save Changes</button>
+    </div>
+
+    <div class="summary-card">
+      <div class="flex gap-2" style="flex-direction:column">
+        <a href="tel:${escapeHTML(state.settings.phone)}" class="btn btn-ghost btn-block"><span class="material-icons-round">call</span> Call Restaurant</a>
+        <button class="btn btn-red btn-block" id="logoutBtn"><span class="material-icons-round">logout</span> Logout</button>
+      </div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   AUTH (Customer)
+   ============================================================ */
+function openAuth(tab='login'){
+  const modal = $('#authModal');
+  modal.classList.add('show');
+  renderAuthBody(tab);
+}
+function renderAuthBody(tab){
+  $('#authTitle').textContent = tab === 'login' ? 'Login' : 'Create Account';
+  if (tab === 'login'){
+    $('#authBody').innerHTML = `
+      <div class="field"><label>Email or Mobile</label><input id="liUser" placeholder="you@example.com or 9876543210" autocomplete="username"></div>
+      <div class="field"><label>Password</label><input id="liPass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+      <button class="btn btn-primary btn-block" id="liBtn"><span class="material-icons-round">login</span> Login</button>
+      <p class="text-center text-sm text-dim mt-3">New here? <a href="#" id="toSignup" style="color:var(--accent);font-weight:600">Create account</a></p>
+    `;
+  } else {
+    $('#authBody').innerHTML = `
+      <div class="field"><label>Full Name</label><input id="suName" placeholder="Your name"></div>
+      <div class="field"><label>Mobile Number</label><input id="suPhone" placeholder="10-digit mobile" inputmode="tel"></div>
+      <div class="field"><label>Email</label><input id="suEmail" placeholder="you@example.com" inputmode="email"></div>
+      <div class="field"><label>Password</label><input id="suPass" type="password" placeholder="Min 6 characters"></div>
+      <div class="field"><label>Confirm Password</label><input id="suPass2" type="password" placeholder="Re-enter password"></div>
+      <div class="field"><label>Address</label><textarea id="suAddr" placeholder="House no, area, city"></textarea></div>
+      <button class="btn btn-primary btn-block" id="suBtn"><span class="material-icons-round">person_add</span> Create Account</button>
+      <p class="text-center text-sm text-dim mt-3">Already have an account? <a href="#" id="toLogin" style="color:var(--accent);font-weight:600">Login</a></p>
+    `;
+  }
+}
+
+function doLogin(){
+  const idf = ($('#liUser').value || '').trim().toLowerCase();
+  const pass = $('#liPass').value;
+  if (!idf || !pass){ toast('Enter credentials', 'error'); return; }
+  const u = state.users.find(x => 
+    (x.email||'').toLowerCase() === idf || (x.phone||'') === idf.replace(/\D/g,'')
+  );
+  if (!u || u.password !== pass){ toast('Invalid credentials', 'error'); return; }
+  state.session = { userId: u.id, loginAt: Date.now() };
+  // log activity
+  state.loginActivity.unshift({ userId: u.id, loginTime: Date.now(), device: navigator.userAgent.slice(0,80) });
+  save();
+  $('#authModal').classList.remove('show');
+  toast('Welcome back, ' + u.name + '!', 'success');
+  updateUserIcon();
+  refreshAll();
+}
+
+function doSignup(){
+  const name = ($('#suName').value||'').trim();
+  const phone = ($('#suPhone').value||'').replace(/\D/g,'');
+  const email = ($('#suEmail').value||'').trim().toLowerCase();
+  const pass = $('#suPass').value;
+  const pass2 = $('#suPass2').value;
+  const addr = ($('#suAddr').value||'').trim();
+
+  if (name.length < 2){ toast('Enter full name', 'error'); return; }
+  if (!/^\d{10}$/.test(phone)){ toast('Enter valid 10-digit mobile', 'error'); return; }
+  if (email && !/^\S+@\S+\.\S+$/.test(email)){ toast('Enter valid email', 'error'); return; }
+  if (pass.length < 6){ toast('Password min 6 characters', 'error'); return; }
+  if (pass !== pass2){ toast('Passwords do not match', 'error'); return; }
+  if (state.users.some(u => u.phone === phone)){ toast('Mobile already registered', 'error'); return; }
+  if (email && state.users.some(u => (u.email||'').toLowerCase() === email)){ toast('Email already registered', 'error'); return; }
+
+  const u = { id: uid('U_'), name, phone, email, password: pass, address: addr, createdAt: Date.now() };
+  state.users.push(u);
+  state.session = { userId: u.id, loginAt: Date.now() };
+  state.loginActivity.unshift({ userId: u.id, loginTime: Date.now(), device: navigator.userAgent.slice(0,80) });
+  save();
+  $('#authModal').classList.remove('show');
+  toast('Account created! Welcome, ' + name, 'success');
+  updateUserIcon();
+  refreshAll();
+}
+
+function updateUserIcon(){
+  const icon = $('#userIcon');
+  if (state.session){
+    const u = state.users.find(x => x.id === state.session.userId);
+    icon.textContent = u ? u.name[0].toUpperCase() : 'person';
+  } else icon.textContent = 'person';
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function go(page){
+  // Handle auth-required pages
+  if (['orders','profile','checkout'].includes(page) && !state.session && page !== 'checkout'){
+    openAuth('login'); return;
+  }
+  if (page === 'checkout' && !state.cart.length){ 
+    go('cart'); return;
+  }
+  state.currentPage = page;
+  $$('.page').forEach(p => p.classList.remove('active'));
+  const el = $('#page-' + page);
+  if (el) el.classList.add('active');
+  $$('.bottom-nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  $$('.desktop-nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Render on demand
+  if (page === 'home') renderPopular();
+  if (page === 'menu') renderMenu();
+  if (page === 'cart') renderCart();
+  if (page === 'checkout') renderCheckout();
+  if (page === 'orders') renderOrders();
+  if (page === 'profile') renderProfile();
+  if (page === 'about') applySettings();
+}
+
+function refreshAll(){
+  applySettings();
+  renderPopular();
+  renderMenu();
+  renderCart();
+  updateCartBadge();
+  updateUserIcon();
+  if (state.currentPage === 'orders') renderOrders();
+  if (state.currentPage === 'checkout') renderCheckout();
+  if (state.currentPage === 'profile') renderProfile();
+}
+
+/* ============================================================
+   ADMIN PANEL
+   ============================================================ */
+function showAdmin(){
+  // Hide customer app, show admin
+  $('#appMain').style.display = 'none';
+  $('header.app-header').style.display = 'none';
+  $('#bottomNav').style.display = 'none';
+  $('#adminRoot').classList.remove('hidden');
+  if (state.adminSession){ showAdminDash(); }
+  else { $('#adminLogin').style.display = 'block'; $('#adminDash').classList.add('hidden'); }
+}
+function hideAdmin(){
+  $('#appMain').style.display = '';
+  $('header.app-header').style.display = '';
+  $('#bottomNav').style.display = '';
+  $('#adminRoot').classList.add('hidden');
+  location.hash = '';
+  refreshAll();
+}
+
+function adminLogin(){
+  const u = ($('#admUser').value||'').trim();
+  const p = $('#admPass').value;
+  const s = state.settings;
+  if (u !== s.adminUsername || p !== s.adminPassword){
+    toast('Invalid admin credentials', 'error'); return;
+  }
+  state.adminSession = true;
+  save();
+  showAdminDash();
+  toast('Welcome, Admin', 'success');
+}
+
+function showAdminDash(){
+  $('#adminLogin').style.display = 'none';
+  $('#adminDash').classList.remove('hidden');
+  $('#adminSub').textContent = state.settings.restaurantName + ' Restaurant';
+  renderAdminTab(state.adminTab);
+}
+
+function renderAdminTab(tab){
+  state.adminTab = tab;
+  $$('#adminTabs .tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  const pane = $('#adminPane');
+  if (tab === 'dash') renderAdminDashboard(pane);
+  else if (tab === 'orders') renderAdminOrders(pane);
+  else if (tab === 'products') renderAdminProducts(pane);
+  else if (tab === 'categories') renderAdminCategories(pane);
+  else if (tab === 'customers') renderAdminCustomers(pane);
+  else if (tab === 'offers') renderAdminOffers(pane);
+  else if (tab === 'settings') renderAdminSettings(pane);
+}
+
+/* ----- Dashboard ----- */
+function renderAdminDashboard(pane){
+  const orders = state.orders;
+  const today = new Date().toDateString();
+  const todayOrders = orders.filter(o => new Date(o.createdAt).toDateString() === today);
+  const todaySales = todayOrders.filter(o => o.status !== 'cancelled').reduce((s,o) => s + o.total, 0);
+  const pending = orders.filter(o => o.status === 'received').length;
+  const preparing = orders.filter(o => o.status === 'preparing').length;
+  const ofd = orders.filter(o => o.status === 'out_for_delivery').length;
+  const delivered = orders.filter(o => o.status === 'delivered').length;
+
+  // Last 7 days sales
+  const days = [];
+  for (let i = 6; i >= 0; i--){
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const key = d.toDateString();
+    const sales = orders.filter(o => new Date(o.createdAt).toDateString() === key && o.status !== 'cancelled')
+                        .reduce((s,o) => s + o.total, 0);
+    const count = orders.filter(o => new Date(o.createdAt).toDateString() === key).length;
+    days.push({ label: d.toLocaleDateString('en-IN',{weekday:'short'}), sales, count });
+  }
+  const maxSales = Math.max(...days.map(d => d.sales), 1);
+
+  // Popular products
+  const prodCount = {};
+  orders.forEach(o => o.items.forEach(i => { prodCount[i.productId] = (prodCount[i.productId]||0) + i.qty; }));
+  const popular = Object.entries(prodCount).sort((a,b) => b[1]-a[1]).slice(0,5)
+    .map(([pid, cnt]) => { const p = state.products.find(x => x.id === pid); return { name: p?.name || 'Unknown', cnt }; });
+
+  pane.innerHTML = `
+    <div class="grid-3 mb-4">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(255,77,45,.15);color:var(--accent)"><span class="material-icons-round">receipt_long</span></div>
+        <div class="stat-label">Total Orders</div><div class="stat-value">${orders.length}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(255,184,0,.15);color:var(--gold)"><span class="material-icons-round">hourglass_top</span></div>
+        <div class="stat-label">Pending</div><div class="stat-value">${pending}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(168,85,247,.15);color:#c084fc"><span class="material-icons-round">outdoor_grill</span></div>
+        <div class="stat-label">Preparing</div><div class="stat-value">${preparing}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(255,77,45,.15);color:var(--accent)"><span class="material-icons-round">delivery_dining</span></div>
+        <div class="stat-label">Out for Delivery</div><div class="stat-value">${ofd}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(34,197,94,.15);color:var(--green)"><span class="material-icons-round">check_circle</span></div>
+        <div class="stat-label">Delivered</div><div class="stat-value">${delivered}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(59,130,246,.15);color:#60a5fa"><span class="material-icons-round">people</span></div>
+        <div class="stat-label">Total Customers</div><div class="stat-value">${state.users.length}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(34,197,94,.15);color:var(--green)"><span class="material-icons-round">local_pizza</span></div>
+        <div class="stat-label">Total Products</div><div class="stat-value">${state.products.length}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(255,184,0,.15);color:var(--gold)"><span class="material-icons-round">trending_up</span></div>
+        <div class="stat-label">Today's Sales</div><div class="stat-value" style="font-size:20px">${money(todaySales)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(34,197,94,.15);color:var(--green)"><span class="material-icons-round">login</span></div>
+        <div class="stat-label">Today's Logins</div><div class="stat-value">${state.loginActivity.filter(l => new Date(l.loginTime).toDateString() === today).length}</div>
+      </div>
+    </div>
+
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:16px">Last 7 Days Sales</h3>
+      <div style="display:flex;align-items:flex-end;gap:8px;height:150px;padding:0 4px">
+        ${days.map(d => `
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px">
+            <div style="font-size:10px;color:var(--text-dim)">${money(d.sales).replace('₹','')}</div>
+            <div style="width:100%;background:linear-gradient(180deg,var(--accent),var(--accent-d));border-radius:6px 6px 0 0;height:${Math.max(4, (d.sales/maxSales)*110)}px;transition:height .4s"></div>
+            <div style="font-size:11px;color:var(--text-dim);font-weight:600">${d.label}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">Popular Products</h3>
+      ${popular.length ? popular.map((p,i) => `
+        <div class="flex flex-b flex-a mb-2" style="padding:8px 0;border-bottom:1px solid var(--border)">
+          <div class="flex flex-a gap-3"><span style="color:var(--accent);font-weight:800;width:20px">#${i+1}</span><span>${escapeHTML(p.name)}</span></div>
+          <span style="color:var(--gold);font-weight:700">${p.cnt} sold</span>
+        </div>
+      `).join('') : '<div class="text-dim text-sm">No sales yet</div>'}
+    </div>
+
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">Login Analytics</h3>
+      <div class="grid-3">
+        <div><div class="stat-label">Total Logins</div><div class="stat-value" style="font-size:22px">${state.loginActivity.length}</div></div>
+        <div><div class="stat-label">Today</div><div class="stat-value" style="font-size:22px">${state.loginActivity.filter(l => new Date(l.loginTime).toDateString() === today).length}</div></div>
+        <div><div class="stat-label">Last 7 Days</div><div class="stat-value" style="font-size:22px">${state.loginActivity.filter(l => Date.now() - l.loginTime < 7*86400000).length}</div></div>
+        <div><div class="stat-label">Last 30 Days</div><div class="stat-value" style="font-size:22px">${state.loginActivity.filter(l => Date.now() - l.loginTime < 30*86400000).length}</div></div>
+      </div>
+    </div>
+  `;
+}
+
+/* ----- Orders ----- */
+function renderAdminOrders(pane){
+  const orders = state.orders;
+  if (!orders.length){ pane.innerHTML = `<div class="empty"><span class="material-icons-round">receipt_long</span><h4>No orders yet</h4></div>`; return; }
+
+  pane.innerHTML = `
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Order ID</th><th>Customer</th><th>Total</th><th>Payment</th><th>Status</th><th>Actions</th>
+        </tr></thead>
+        <tbody>
+          ${orders.map(o => `
+            <tr>
+              <td><b>${escapeHTML(o.orderId)}</b><div class="text-sm text-dim">${fmtDateTime(o.createdAt)}</div></td>
+              <td>
+                <div>${escapeHTML(o.customerName)}</div>
+                <div class="text-sm text-dim">${escapeHTML(o.phone)}</div>
+              </td>
+              <td><b>${money(o.total)}</b></td>
+              <td>${escapeHTML(o.payment)}</td>
+              <td><span class="pill status-${o.status}">${o.status.replace(/_/g,' ')}</span></td>
+              <td>
+                <select class="size-select" data-ostatus="${o.id}" style="width:150px">
+                  ${['received','confirmed','preparing','ready','out_for_delivery','delivered','cancelled'].map(s => 
+                    `<option value="${s}" ${o.status===s?'selected':''}>${s.replace(/_/g,' ')}</option>`
+                  ).join('')}
+                </select>
+                <button class="icon-btn" style="width:30px;height:30px;display:inline-grid" data-oview="${o.id}"><span class="material-icons-round" style="font-size:16px">visibility</span></button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function viewOrderAdmin(oid){
+  const o = state.orders.find(x => x.id === oid);
+  if (!o) return;
+  $('#genTitle').textContent = 'Order ' + o.orderId;
+  $('#genBody').innerHTML = `
+    <div class="mb-3">
+      <div class="text-sm text-dim">Customer</div>
+      <div style="font-weight:700">${escapeHTML(o.customerName)}</div>
+      <div class="text-sm">${escapeHTML(o.phone)}</div>
+    </div>
+    <div class="mb-3">
+      <div class="text-sm text-dim">Address</div>
+      <div>${escapeHTML(o.address)}</div>
+    </div>
+    <div class="mb-3">
+      <div class="text-sm text-dim mb-2">Items</div>
+      ${o.items.map(i => `<div class="flex flex-b" style="padding:4px 0"><span>${escapeHTML(i.name)}${i.size?' ('+escapeHTML(i.size)+')':''} × ${i.qty}</span><span>${money(i.price*i.qty)}</span></div>`).join('')}
+    </div>
+    <div class="summary-card">
+      <div class="summary-row"><span>Subtotal</span><span>${money(o.subtotal)}</span></div>
+      <div class="summary-row"><span>Delivery</span><span>${money(o.delivery)}</span></div>
+      ${o.discount > 0 ? `<div class="summary-row" style="color:var(--green)"><span>Discount</span><span>− ${money(o.discount)}</span></div>` : ''}
+      <div class="summary-row total"><span>Total</span><span class="amt">${money(o.total)}</span></div>
+    </div>
+    <div class="text-sm text-dim mt-3">Payment: ${escapeHTML(o.payment)} • Placed: ${fmtDateTime(o.createdAt)}</div>
+  `;
+  $('#genericModal').classList.add('show');
+}
+
+function updateOrderStatus(oid, status){
+  const o = state.orders.find(x => x.id === oid);
+  if (!o) return;
+  o.status = status;
+  o.statusHistory.push({ status, at: Date.now() });
+  if (status === 'delivered') o.deliveredAt = Date.now();
+  // Notification for customer
+  const msgs = {
+    confirmed: 'Your order has been confirmed ✅',
+    preparing: 'Your pizza is being prepared 🍕',
+    ready: 'Your order is ready! 📦',
+    out_for_delivery: 'Your order is out for delivery! 🛵',
+    delivered: 'Your order has been delivered ✅',
+    cancelled: 'Your order has been cancelled ❌'
+  };
+  if (msgs[status] && o.userId){
+    state.notifications.unshift({ id: uid('N_'), type:'customer', userId: o.userId, title:'Order '+o.orderId, message: msgs[status], createdAt: Date.now(), read: false });
+  }
+  save();
+  toast('Status updated to ' + status.replace(/_/g,' '), 'success');
+  renderAdminTab(state.adminTab);
+}
+
+/* ----- Products ----- */
+function renderAdminProducts(pane){
+  pane.innerHTML = `
+    <div class="flex flex-b flex-a mb-3" style="flex-wrap:wrap;gap:8px">
+      <h3 style="font-weight:800">All Products (${state.products.length})</h3>
+      <button class="btn btn-primary" id="addProdBtn"><span class="material-icons-round">add</span> Add Product</button>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${state.products.map(p => `
+            <tr>
+              <td><img src="${escapeHTML(p.image)}" style="width:48px;height:48px;border-radius:8px;object-fit:cover" onerror="this.src='https://via.placeholder.com/50/1a1a1a/ff4d2d?text=?'"></td>
+              <td>${escapeHTML(p.name)}<div class="text-sm text-dim">${p.veg ? '🟢 Veg' : '🔴 Non-Veg'}</div></td>
+              <td>${escapeHTML(p.category)}</td>
+              <td>${p.discountPrice > 0 ? `<b>${money(p.discountPrice)}</b> <span style="text-decoration:line-through;color:var(--text-dim);font-size:11px">${money(p.price)}</span>` : money(p.price)}</td>
+              <td><span class="pill" style="background:${p.available?'rgba(34,197,94,.15)':'rgba(239,68,68,.15)'};color:${p.available?'var(--green)':'var(--red)'}">${p.available?'Active':'Disabled'}</span></td>
+              <td>
+                <button class="icon-btn" style="width:32px;height:32px;display:inline-grid" data-pedit="${p.id}"><span class="material-icons-round" style="font-size:16px;color:var(--gold)">edit</span></button>
+                <button class="icon-btn" style="width:32px;height:32px;display:inline-grid" data-ptoggle="${p.id}"><span class="material-icons-round" style="font-size:16px">${p.available?'toggle_on':'toggle_off'}</span></button>
+                <button class="icon-btn" style="width:32px;height:32px;display:inline-grid" data-pdel="${p.id}"><span class="material-icons-round" style="font-size:16px;color:var(--red)">delete</span></button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function productForm(prod){
+  const isEdit = !!prod;
+  const p = prod || { name:'', category: state.categories[0]||'Pizza', description:'', price:'', discountPrice:'', image:'', available:true, veg:true, sizes:[] };
+  $('#genTitle').textContent = isEdit ? 'Edit Product' : 'Add Product';
+  $('#genBody').innerHTML = `
+    <div class="field"><label>Product Name</label><input id="fName" value="${escapeHTML(p.name)}"></div>
+    <div class="field"><label>Category</label>
+      <select id="fCat">
+        ${state.categories.map(c => `<option ${c===p.category?'selected':''}>${escapeHTML(c)}</option>`).join('')}
+      </select>
+    </div>
+    <div class="field"><label>Description</label><textarea id="fDesc">${escapeHTML(p.description)}</textarea></div>
+    <div class="field"><label>Price (₹)</label><input id="fPrice" type="number" value="${p.price}" inputmode="decimal"></div>
+    <div class="field"><label>Discount Price (₹) <span class="text-dim">(0 = no discount)</span></label><input id="fDisc" type="number" value="${p.discountPrice || 0}" inputmode="decimal"></div>
+    <div class="field"><label>Image URL</label><input id="fImg" value="${escapeHTML(p.image)}" placeholder="https://..."></div>
+    <div class="field"><label>Or Upload Image File</label><input type="file" id="fImgFile" accept="image/*"></div>
+    <div class="field"><label>Sizes (comma separated, blank if none)</label><input id="fSizes" value="${(p.sizes||[]).join(', ')}" placeholder="Small, Medium, Large"></div>
+    <div class="field">
+      <label>Type</label>
+      <label style="display:flex;gap:8px;align-items:center;color:var(--text);font-weight:500;cursor:pointer;margin-bottom:4px"><input type="radio" name="veg" value="veg" ${p.veg?'checked':''} style="width:auto"> Vegetarian</label>
+      <label style="display:flex;gap:8px;align-items:center;color:var(--text);font-weight:500;cursor:pointer"><input type="radio" name="veg" value="non" ${!p.veg?'checked':''} style="width:auto"> Non-Vegetarian</label>
+    </div>
+    <div class="field">
+      <label style="display:flex;gap:8px;align-items:center;color:var(--text);font-weight:500;cursor:pointer"><input type="checkbox" id="fAvail" ${p.available?'checked':''} style="width:auto"> Available / Active</label>
+    </div>
+    <button class="btn btn-primary btn-block" id="fSaveBtn"><span class="material-icons-round">save</span> ${isEdit?'Save Changes':'Add Product'}</button>
+  `;
+  $('#genericModal').classList.add('show');
+
+  // Image file → base64
+  $('#fImgFile').addEventListener('change', e => {
+    const file = e.target.files[0]; if (!file) return;
+    if (!file.type.startsWith('image/')){ toast('Only images allowed', 'error'); return; }
+    if (file.size > 2*1024*1024){ toast('Image must be < 2MB', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = ev => { $('#fImg').value = ev.target.result; };
+    reader.readAsDataURL(file);
+  });
+
+  $('#fSaveBtn').addEventListener('click', () => {
+    const name = $('#fName').value.trim();
+    const category = $('#fCat').value;
+    const description = $('#fDesc').value.trim();
+    const price = Number($('#fPrice').value) || 0;
+    const disc = Number($('#fDisc').value) || 0;
+    const image = $('#fImg').value.trim() || 'https://via.placeholder.com/400x400/1a1a1a/ff4d2d?text=' + encodeURIComponent(name || 'Item');
+    const sizes = $('#fSizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const veg = document.querySelector('input[name="veg"]:checked').value === 'veg';
+    const available = $('#fAvail').checked;
+
+    if (name.length < 2){ toast('Enter product name', 'error'); return; }
+    if (price <= 0){ toast('Enter valid price', 'error'); return; }
+    if (disc >= price && disc > 0){ toast('Discount must be less than price', 'error'); return; }
+
+    if (isEdit){
+      Object.assign(p, { name, category, description, price, discountPrice: disc, image, sizes, veg, available });
+      toast('Product updated ✓', 'success');
+    } else {
+      state.products.push({ id: uid('P_'), name, category, description, price, discountPrice: disc, image, sizes, veg, available, createdAt: Date.now() });
+      toast('Product added ✓', 'success');
+    }
+    save();
+    $('#genericModal').classList.remove('show');
+    renderAdminTab('products');
+  });
+}
+
+/* ----- Categories ----- */
+function renderAdminCategories(pane){
+  pane.innerHTML = `
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">Add Category</h3>
+      <div class="flex gap-2">
+        <input id="newCat" placeholder="Category name" style="flex:1;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text)">
+        <button class="btn btn-primary" id="addCatBtn"><span class="material-icons-round">add</span> Add</button>
+      </div>
+    </div>
+    <div class="stat-card">
+      <h3 style="font-weight:800;margin-bottom:12px">Existing Categories (${state.categories.length})</h3>
+      ${state.categories.map(c => `
+        <div class="flex flex-b flex-a" style="padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-weight:600">${escapeHTML(c)}</span>
+          <button class="icon-btn" style="width:32px;height:32px" data-catdel="${escapeHTML(c)}"><span class="material-icons-round" style="color:var(--red);font-size:18px">delete</span></button>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ----- Customers ----- */
+function renderAdminCustomers(pane){
+  if (!state.users.length){ pane.innerHTML = `<div class="empty"><span class="material-icons-round">people</span><h4>No customers yet</h4></div>`; return; }
+  pane.innerHTML = `
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Name</th><th>Mobile</th><th>Email</th><th>Orders</th><th>Joined</th></tr></thead>
+        <tbody>
+          ${state.users.map(u => {
+            const oc = state.orders.filter(o => o.userId === u.id).length;
+            return `<tr>
+              <td><b>${escapeHTML(u.name)}</b></td>
+              <td>${escapeHTML(u.phone)}</td>
+              <td>${escapeHTML(u.email || '—')}</td>
+              <td>${oc}</td>
+              <td>${fmtDate(u.createdAt)}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* ----- Offers ----- */
+function renderAdminOffers(pane){
+  pane.innerHTML = `
+    <div class="flex flex-b flex-a mb-3">
+      <h3 style="font-weight:800">Offers (${state.offers.length})</h3>
+      <button class="btn btn-primary" id="addOfferBtn"><span class="material-icons-round">add</span> Add Offer</button>
+    </div>
+    ${state.offers.length ? `<div class="tbl-wrap"><table>
+      <thead><tr><th>Code</th><th>Discount</th><th>Min Order</th><th>Validity</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+      ${state.offers.map(o => `<tr>
+        <td><b>${escapeHTML(o.code)}</b><div class="text-sm text-dim">${escapeHTML(o.name)}</div></td>
+        <td>${o.discount}%</td>
+        <td>${money(o.minOrder)}</td>
+        <td class="text-sm">${o.startDate}<br>${o.endDate}</td>
+        <td><span class="pill" style="background:${o.active?'rgba(34,197,94,.15)':'rgba(239,68,68,.15)'};color:${o.active?'var(--green)':'var(--red)'}">${o.active?'Active':'Inactive'}</span></td>
+        <td>
+          <button class="icon-btn" style="width:32px;height:32px;display:inline-grid" data-oedit="${o.id}"><span class="material-icons-round" style="font-size:16px;color:var(--gold)">edit</span></button>
+          <button class="icon-btn" style="width:32px;height:32px;display:inline-grid" data-odel="${o.id}"><span class="material-icons-round" style="font-size:16px;color:var(--red)">delete</span></button>
+        </td>
+      </tr>`).join('')}
+      </tbody>
+    </table></div>` : `<div class="empty"><span class="material-icons-round">local_offer</span><h4>No offers yet</h4></div>`}
+  `;
+}
+
+function offerForm(offer){
+  const o = offer || { name:'', code:'', discount:10, minOrder:200, startDate:new Date().toISOString().slice(0,10), endDate:new Date(Date.now()+7*86400000).toISOString().slice(0,10), active:true };
+  $('#genTitle').textContent = offer ? 'Edit Offer' : 'Add Offer';
+  $('#genBody').innerHTML = `
+    <div class="field"><label>Offer Name</label><input id="oName" value="${escapeHTML(o.name)}" placeholder="Weekend Special"></div>
+    <div class="field"><label>Coupon Code</label><input id="oCode" value="${escapeHTML(o.code)}" placeholder="SAVE10"></div>
+    <div class="field"><label>Discount %</label><input id="oDisc" type="number" value="${o.discount}" min="1" max="90"></div>
+    <div class="field"><label>Minimum Order (₹)</label><input id="oMin" type="number" value="${o.minOrder}"></div>
+    <div class="field"><label>Start Date</label><input id="oStart" type="date" value="${o.startDate}"></div>
+    <div class="field"><label>End Date</label><input id="oEnd" type="date" value="${o.endDate}"></div>
+    <div class="field"><label style="display:flex;gap:8px;align-items:center;color:var(--text);font-weight:500;cursor:pointer"><input type="checkbox" id="oActive" ${o.active?'checked':''} style="width:auto"> Active</label></div>
+    <button class="btn btn-primary btn-block" id="oSave"><span class="material-icons-round">save</span> ${offer?'Update':'Create'} Offer</button>
+  `;
+  $('#genericModal').classList.add('show');
+
+  $('#oSave').addEventListener('click', () => {
+    const name = $('#oName').value.trim();
+    const code = $('#oCode').value.trim().toUpperCase();
+    const discount = Number($('#oDisc').value) || 0;
+    const minOrder = Number($('#oMin').value) || 0;
+    const startDate = $('#oStart').value;
+    const endDate = $('#oEnd').value;
+    const active = $('#oActive').checked;
+    if (!name || !code){ toast('Name and code required', 'error'); return; }
+    if (discount < 1 || discount > 90){ toast('Discount 1-90%', 'error'); return; }
+
+    if (offer){
+      Object.assign(offer, { name, code, discount, minOrder, startDate, endDate, active });
+      toast('Offer updated ✓', 'success');
+    } else {
+      state.offers.push({ id: uid('OF_'), name, code, discount, minOrder, startDate, endDate, active, createdAt: Date.now() });
+      toast('Offer created ✓', 'success');
+    }
+    save();
+    $('#genericModal').classList.remove('show');
+    renderAdminTab('offers');
+  });
+}
+
+/* ----- Settings ----- */
+function renderAdminSettings(pane){
+  const s = state.settings;
+  pane.innerHTML = `
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">🏪 Restaurant Status</h3>
+      <div class="flex flex-b flex-a mb-3">
+        <div>
+          <div style="font-weight:600">Currently: <span style="color:${s.isOpen?'var(--green)':'var(--red)'}">${s.isOpen?'OPEN':'CLOSED'}</span></div>
+          <div class="text-sm text-dim">Customers ${s.isOpen?'can':'cannot'} place orders</div>
+        </div>
+        <button class="btn ${s.isOpen?'btn-red':'btn-green'}" id="toggleOpenBtn">
+          <span class="material-icons-round">${s.isOpen?'lock':'lock_open'}</span> ${s.isOpen?'Close Restaurant':'Open Restaurant'}
+        </button>
+      </div>
+      <div class="flex flex-b flex-a">
+        <div>
+          <div style="font-weight:600">Online Payment: <span style="color:${s.onlinePayment?'var(--green)':'var(--red)'}">${s.onlinePayment?'ENABLED':'DISABLED'}</span></div>
+          <div class="text-sm text-dim">If disabled, customers only see Cash on Delivery</div>
+        </div>
+        <button class="btn ${s.onlinePayment?'btn-red':'btn-green'}" id="togglePayBtn">
+          <span class="material-icons-round">${s.onlinePayment?'toggle_off':'toggle_on'}</span> ${s.onlinePayment?'Disable':'Enable'}
+        </button>
+      </div>
+    </div>
+
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">ℹ️ Restaurant Info</h3>
+      <div class="field"><label>Restaurant Name</label><input id="sName" value="${escapeHTML(s.restaurantName)}"></div>
+      <div class="field"><label>Tagline</label><input id="sTag" value="${escapeHTML(s.tagline)}"></div>
+      <div class="field"><label>Phone Number</label><input id="sPhone" value="${escapeHTML(s.phone)}" inputmode="tel"></div>
+      <div class="field"><label>Email</label><input id="sEmail" value="${escapeHTML(s.email)}" inputmode="email"></div>
+      <div class="field"><label>Address</label><textarea id="sAddr">${escapeHTML(s.address)}</textarea></div>
+      <div class="field"><label>Instagram ID</label><input id="sIG" value="${escapeHTML(s.instagram)}" placeholder="hyfun5656"></div>
+      <div class="field"><label>WhatsApp Number</label><input id="sWA" value="${escapeHTML(s.whatsapp)}" inputmode="tel"></div>
+      <div class="field"><label>Logo URL</label><input id="sLogo" value="${escapeHTML(s.logo)}" placeholder="https://..."></div>
+      <div class="field"><label>Or Upload Logo</label><input type="file" id="sLogoFile" accept="image/*"></div>
+      <button class="btn btn-primary btn-block" id="sSaveInfo"><span class="material-icons-round">save</span> Save Info</button>
+    </div>
+
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">💰 Delivery Charges</h3>
+      <div class="field"><label>Delivery Charge (₹)</label><input id="sDel" type="number" value="${s.deliveryCharge}"></div>
+      <div class="field"><label>Free Delivery Above (₹)</label><input id="sFree" type="number" value="${s.freeDeliveryAbove}"></div>
+      <div class="field"><label>Estimated Delivery Time (minutes)</label><input id="sTime" type="number" value="${s.deliveryTime}"></div>
+      <button class="btn btn-primary btn-block" id="sSaveDelivery"><span class="material-icons-round">save</span> Save Delivery Settings</button>
+    </div>
+
+    <div class="stat-card mb-4" style="border:1px solid rgba(239,68,68,.3)">
+      <h3 style="font-weight:800;margin-bottom:12px">🔐 Admin Credentials</h3>
+      <div class="field"><label>Admin Username</label><input id="sAdmUser" value="${escapeHTML(s.adminUsername)}"></div>
+      <div class="field"><label>New Password (leave blank to keep same)</label><input id="sAdmPass" type="password" placeholder="••••••"></div>
+      <button class="btn btn-primary btn-block" id="sSaveCreds"><span class="material-icons-round">key</span> Update Credentials</button>
+    </div>
+
+    <div class="stat-card mb-4">
+      <h3 style="font-weight:800;margin-bottom:12px">⚠️ Danger Zone</h3>
+      <button class="btn btn-ghost btn-block mb-2" id="exportBtn"><span class="material-icons-round">download</span> Export All Data (JSON)</button>
+      <button class="btn btn-red btn-block" id="resetBtn"><span class="material-icons-round">restart_alt</span> Reset All Data</button>
+    </div>
+  `;
+
+  // Logo file
+  $('#sLogoFile').addEventListener('change', e => {
+    const file = e.target.files[0]; if (!file) return;
+    if (!file.type.startsWith('image/')){ toast('Only images allowed', 'error'); return; }
+    if (file.size > 1024*1024){ toast('Logo < 1MB', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = ev => { $('#sLogo').value = ev.target.result; toast('Logo loaded, click Save', 'info'); };
+    reader.readAsDataURL(file);
+  });
+
+  $('#toggleOpenBtn').addEventListener('click', () => {
+    state.settings.isOpen = !state.settings.isOpen;
+    save(); applySettings();
+    toast(state.settings.isOpen ? 'Restaurant is now OPEN ✓' : 'Restaurant is now CLOSED', state.settings.isOpen?'success':'info');
+    renderAdminTab('settings');
+  });
+  $('#togglePayBtn').addEventListener('click', () => {
+    state.settings.onlinePayment = !state.settings.onlinePayment;
+    save();
+    toast('Online payment ' + (state.settings.onlinePayment?'enabled':'disabled'), 'success');
+    renderAdminTab('settings');
+  });
+  $('#sSaveInfo').addEventListener('click', () => {
+    Object.assign(state.settings, {
+      restaurantName: $('#sName').value.trim(),
+      tagline: $('#sTag').value.trim(),
+      phone: $('#sPhone').value.trim(),
+      email: $('#sEmail').value.trim(),
+      address: $('#sAddr').value.trim(),
+      instagram: $('#sIG').value.trim(),
+      whatsapp: $('#sWA').value.trim(),
+      logo: $('#sLogo').value.trim()
+    });
+    save(); applySettings();
+    toast('Restaurant info updated ✓', 'success');
+  });
+  $('#sSaveDelivery').addEventListener('click', () => {
+    state.settings.deliveryCharge = Number($('#sDel').value) || 0;
+    state.settings.freeDeliveryAbove = Number($('#sFree').value) || 0;
+    state.settings.deliveryTime = Number($('#sTime').value) || 30;
+    save();
+    toast('Delivery settings updated ✓', 'success');
+  });
+  $('#sSaveCreds').addEventListener('click', () => {
+    const u = $('#sAdmUser').value.trim();
+    const p = $('#sAdmPass').value;
+    if (u.length < 3){ toast('Username min 3 chars', 'error'); return; }
+    state.settings.adminUsername = u;
+    if (p){ 
+      if (p.length < 6){ toast('Password min 6 chars', 'error'); return; }
+      state.settings.adminPassword = p;
+    }
+    save();
+    toast('Admin credentials updated ✓', 'success');
+    $('#sAdmPass').value = '';
+  });
+  $('#exportBtn').addEventListener('click', () => {
+    const data = {};
+    Object.keys(localStorage).forEach(k => { if (k.startsWith('hyfun5656_')) data[k] = localStorage.getItem(k); });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'hyfun5656-backup-' + Date.now() + '.json'; a.click();
+    URL.revokeObjectURL(url);
+    toast('Backup downloaded ✓', 'success');
+  });
+  $('#resetBtn').addEventListener('click', () => {
+    if (!confirm('⚠️ This will DELETE all data (orders, products, users). Are you sure?')) return;
+    if (!confirm('Really sure? This cannot be undone!')) return;
+    Object.keys(localStorage).forEach(k => { if (k.startsWith('hyfun5656_')) localStorage.removeItem(k); });
+    location.reload();
+  });
+}
+
+/* ============================================================
+   EVENT LISTENERS
+   ============================================================ */
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('[data-page]');
+  if (target){
+    e.preventDefault();
+    go(target.dataset.page);
+    return;
+  }
+  const authBtn = e.target.closest('[data-auth]');
+  if (authBtn){ openAuth(authBtn.dataset.auth); return; }
+
+  const addBtn = e.target.closest('[data-add]');
+  if (addBtn){ addToCart(addBtn.dataset.add); return; }
+
+  const qtyBtn = e.target.closest('[data-qty]');
+  if (qtyBtn){ changeQty(qtyBtn.dataset.qty, Number(qtyBtn.dataset.d)); return; }
+
+  const rmBtn = e.target.closest('[data-rm]');
+  if (rmBtn){ removeCartItem(rmBtn.dataset.rm); return; }
+
+  const catBtn = e.target.closest('[data-cat]');
+  if (catBtn){ state.currentCategory = catBtn.dataset.cat; renderMenu(); return; }
+
+  // Admin actions
+  const oStatus = e.target.closest('[data-ostatus]');
+  if (oStatus) return; // handled via change
+  const oView = e.target.closest('[data-oview]');
+  if (oView){ viewOrderAdmin(oView.dataset.oview); return; }
+
+  const pEdit = e.target.closest('[data-pedit]');
+  if (pEdit){ productForm(state.products.find(p => p.id === pEdit.dataset.pedit)); return; }
+  const pDel = e.target.closest('[data-pdel]');
+  if (pDel){
+    if (confirm('Delete this product?')){
+      state.products = state.products.filter(p => p.id !== pDel.dataset.pdel);
+      save(); renderAdminTab('products'); toast('Product deleted', 'info');
+    }
+    return;
+  }
+  const pToggle = e.target.closest('[data-ptoggle]');
+  if (pToggle){
+    const p = state.products.find(x => x.id === pToggle.dataset.ptoggle);
+    if (p){ p.available = !p.available; save(); renderAdminTab('products'); toast('Product ' + (p.available?'enabled':'disabled'), 'success'); }
+    return;
+  }
+
+  const cDel = e.target.closest('[data-catdel]');
+  if (cDel){
+    const cat = cDel.dataset.catdel;
+    if (state.products.some(p => p.category === cat)){ toast('Cannot delete: products exist in this category', 'error'); return; }
+    if (confirm('Delete category "' + cat + '"?')){
+      state.categories = state.categories.filter(c => c !== cat);
+      save(); renderAdminTab('categories'); toast('Category deleted', 'info');
+    }
+    return;
+  }
+
+  const oEdit = e.target.closest('[data-oedit]');
+  if (oEdit){ offerForm(state.offers.find(o => o.id === oEdit.dataset.oedit)); return; }
+  const oDel = e.target.closest('[data-odel]');
+  if (oDel){
+    if (confirm('Delete this offer?')){
+      state.offers = state.offers.filter(o => o.id !== oDel.dataset.odel);
+      save(); renderAdminTab('offers'); toast('Offer deleted', 'info');
+    }
+    return;
+  }
+
+  // Close modals if clicked outside
+  if (e.target.classList.contains('modal')) e.target.classList.remove('show');
+});
+
+document.addEventListener('change', (e) => {
+  const oStatus = e.target.closest('[data-ostatus]');
+  if (oStatus){ updateOrderStatus(oStatus.dataset.ostatus, oStatus.value); }
+});
+
+/* Header buttons */
+$('#cartBtn').addEventListener('click', () => go('cart'));
+$('#userBtn').addEventListener('click', () => {
+  if (state.session) go('profile');
+  else openAuth('login');
+});
+$('#brandBtn').addEventListener('click', () => go('home'));
+
+/* Bottom nav / desktop nav */
+$$('.bottom-nav button, .desktop-nav button').forEach(b => b.addEventListener('click', () => go(b.dataset.page)));
+
+/* Auth modal */
+$('#authClose').addEventListener('click', () => $('#authModal').classList.remove('show'));
+$('#authModal').addEventListener('click', (e) => { if (e.target.id === 'authModal') $('#authModal').classList.remove('show'); });
+document.addEventListener('click', e => {
+  if (e.target.id === 'toSignup'){ e.preventDefault(); renderAuthBody('signup'); }
+  if (e.target.id === 'toLogin'){ e.preventDefault(); renderAuthBody('login'); }
+  if (e.target.id === 'liBtn'){ doLogin(); }
+  if (e.target.id === 'suBtn'){ doSignup(); }
+  if (e.target.id === 'pfSave'){ saveProfile(); }
+  if (e.target.id === 'logoutBtn'){ 
+    state.session = null; save(); updateUserIcon(); 
+    toast('Logged out', 'info');
+    go('home');
+  }
+  if (e.target.id === 'placeOrderBtn'){ placeOrder(); }
+  if (e.target.id === 'ckApply'){ applyCoupon(); }
+  if (e.target.id === 'addProdBtn'){ productForm(null); }
+  if (e.target.id === 'addCatBtn'){ addCategory(); }
+  if (e.target.id === 'addOfferBtn'){ offerForm(null); }
+  if (e.target.id === 'admLoginBtn'){ adminLogin(); }
+  if (e.target.id === 'admBackBtn'){ hideAdmin(); }
+  if (e.target.id === 'adminViewSite'){ hideAdmin(); }
+  if (e.target.id === 'adminLogout'){ 
+    state.adminSession = false; save(); hideAdmin();
+    toast('Admin logged out', 'info');
+  }
+});
+
+/* Generic modal close */
+$('#genClose').addEventListener('click', () => $('#genericModal').classList.remove('show'));
+$('#genericModal').addEventListener('click', (e) => { if (e.target.id === 'genericModal') $('#genericModal').classList.remove('show'); });
+
+/* Admin tabs */
+document.addEventListener('click', e => {
+  const tab = e.target.closest('#adminTabs .tab');
+  if (tab) renderAdminTab(tab.dataset.tab);
+});
+
+/* Enter key submits on login/signup */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter'){
+    if (e.target.id === 'liPass') doLogin();
+    if (e.target.id === 'suPass2') doSignup();
+    if (e.target.id === 'admPass') adminLogin();
+  }
+});
+
+/* Admin access via hash + logo tap easter egg */
+function checkAdminHash(){
+  if (location.hash === '#admin') showAdmin();
+  else if (!$('#adminRoot').classList.contains('hidden') && location.hash !== '#admin') hideAdmin();
+}
+window.addEventListener('hashchange', checkAdminHash);
+
+let logoClicks = 0, logoTimer = null;
+$('#brandBtn').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => logoClicks = 0, 1500);
+  if (logoClicks >= 7){ 
+    logoClicks = 0;
+    location.hash = '#admin';
+    showAdmin();
+  }
+});
+
+/* Notifications polling: check order status changes and show toasts */
+let lastOrderStatus = {};
+function checkNotifications(){
+  if (!state.session) return;
+  const my = state.orders.filter(o => o.userId === state.session.userId);
+  my.forEach(o => {
+    const prev = lastOrderStatus[o.id];
+    if (prev && prev !== o.status){
+      const msg = {
+        confirmed: '✅ Your order ' + o.orderId + ' has been confirmed',
+        preparing: '🍕 Your order is being prepared',
+        ready: '📦 Your order is ready',
+        out_for_delivery: '🛵 Your order is out for delivery!',
+        delivered: '🎉 Your order has been delivered!'
+      }[o.status];
+      if (msg) toast(msg, 'success');
+    }
+    lastOrderStatus[o.id] = o.status;
+  });
+}
+setInterval(checkNotifications, 3000);
+
+/* Profile save */
+function saveProfile(){
+  if (!state.session) return;
+  const u = state.users.find(x => x.id === state.session.userId);
+  if (!u) return;
+  const name = $('#pfName').value.trim();
+  const phone = $('#pfPhone').value.trim().replace(/\D/g,'');
+  const email = $('#pfEmail').value.trim().toLowerCase();
+  const address = $('#pfAddr').value.trim();
+  if (name.length < 2){ toast('Enter valid name', 'error'); return; }
+  if (!/^\d{10}$/.test(phone)){ toast('Enter valid 10-digit mobile', 'error'); return; }
+  if (email && !/^\S+@\S+\.\S+$/.test(email)){ toast('Enter valid email', 'error'); return; }
+  Object.assign(u, { name, phone, email, address });
+  save(); updateUserIcon();
+  toast('Profile updated ✓', 'success');
+  renderProfile();
+}
+
+/* Add category */
+function addCategory(){
+  const name = $('#newCat').value.trim();
+  if (!name){ toast('Enter category name', 'error'); return; }
+  if (state.categories.includes(name)){ toast('Category already exists', 'error'); return; }
+  state.categories.push(name);
+  save();
+  $('#newCat').value = '';
+  toast('Category added ✓', 'success');
+  renderAdminTab('categories');
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function init(){
+  applySettings();
+  renderPopular();
+  renderMenu();
+  updateCartBadge();
+  updateUserIcon();
+  checkAdminHash();
+
+  // Seed a demo offer if none
+  if (!state.offers.length){
+    state.offers.push({
+      id: uid('OF_'), name:'Welcome 10% Off', code:'WELCOME10', discount:10, minOrder:200,
+      startDate: new Date().toISOString().slice(0,10),
+      endDate: new Date(Date.now() + 90*86400000).toISOString().slice(0,10),
+      active: true, createdAt: Date.now()
+    });
+    save();
+  }
+})();
+</script>
+</body>
+</html>
